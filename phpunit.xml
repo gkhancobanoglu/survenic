@@ -1,0 +1,37 @@
+<phpunit bootstrap="tests/bootstrap.php" 
+         stderr="true"
+         colors="true" >
+    <testsuites>
+        <testsuite name="unit">
+            <directory>tests/unit</directory>
+        </testsuite>
+        <testsuite name="functional">
+            <directory>tests/functional</directory>
+        </testsuite>
+        <testsuite name="acceptance">
+            <directory>tests/functional/acceptance</directory>
+        </testsuite>
+        <testsuite name="remotecontrolunit">
+            <file>tests/unit/CsrfHttpRequestTest.php</file>
+            <file>tests/unit/helpers/RemoteControlGetAvailableSiteSettingsTest.php</file>
+            <file>tests/unit/helpers/RemoteControlGetUploadedFilesTest.php</file>
+            <file>tests/unit/helpers/RemoteControlQuotaTest.php</file>
+            <directory>tests/unit/helpers/remotecontrol</directory>
+        </testsuite>
+        <testsuite name="remotecontrolfunctional">
+            <file>tests/functional/backend/RemoteControlJsonrpcTest.php</file>
+            <file>tests/functional/backend/RemoteControlXmlrpcTest.php</file>
+        </testsuite>
+    </testsuites>
+
+    <!-- This filter is for the code coverage -->
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">application/models/services</directory>
+        </whitelist>
+    </filter>
+
+    <logging>
+        <log type="coverage-clover" target="cov.xml"/>
+    </logging>
+</phpunit>
