@@ -1,0 +1,46 @@
+[2025-08-13 09:20:40] [SELFSCAN] ran: {"considered":0,"sent":0,"cutoff":"2025-08-13 09:17:40"}
+[2025-08-13 09:28:32] [SELFSCAN] ran: {"considered":0,"sent":0,"cutoff":"2025-08-13 09:25:32"}
+[2025-08-13 09:37:54] [SELFSCAN] ran: {"considered":0,"sent":0,"cutoff":"2025-08-13 09:34:54"}
+[2025-08-13 09:39:42] [SELFSCAN] ran: {"considered":0,"sent":0,"cutoff":"2025-08-13 09:36:42"}
+[2025-08-13 09:43:04] [SELFSCAN] ran: {"considered":0,"sent":0,"cutoff":"2025-08-13 09:40:04"}
+[2025-08-13 09:44:09] [SELFSCAN] ran: {"considered":0,"sent":0,"cutoff":"2025-08-13 09:41:09"}
+[2025-08-13 09:44:10] PubSub SUCCESS: page_submit
+[2025-08-13 09:44:10] [INFO] Step 1 entered → Previous step (0) answers sent from POST (beforeControllerAction).
+[2025-08-13 09:44:17] PubSub SUCCESS: page_submit
+[2025-08-13 09:44:17] [INFO] Step 2 entered → Previous step (1) answers sent from POST (beforeControllerAction).
+[2025-08-13 10:14:49] [SELFSCAN] ran: {"considered":0,"sent":0,"cutoff":"2025-08-13 10:11:49"}
+[2025-08-13 10:15:29] PubSub SUCCESS: page_submit
+[2025-08-13 10:15:29] [INFO] Step 1 entered → Previous step (0) answers sent from POST (beforeControllerAction).
+[2025-08-13 10:16:23] [SELFSCAN] ran: {"considered":0,"sent":0,"cutoff":"2025-08-13 10:13:23"}
+[2025-08-13 10:16:23] PubSub SUCCESS: page_submit
+[2025-08-13 10:16:23] [INFO] Step 2 entered → Previous step (1) answers sent from POST (beforeControllerAction).
+[2025-08-13 10:28:45] [SELFSCAN] ran: {"considered":0,"sent":0,"cutoff":"2025-08-13 10:25:45"}
+[2025-08-13 10:29:16] PubSub SUCCESS: page_submit
+[2025-08-13 10:29:16] [INFO] Step 1 entered → Previous step (0) answers sent from POST (beforeControllerAction).
+[2025-08-13 10:29:25] PubSub SUCCESS: page_submit
+[2025-08-13 10:29:25] [INFO] Step 2 entered → Previous step (1) answers sent from POST (beforeControllerAction).
+[2025-08-13 10:35:02] [SELFSCAN] ran: {"considered":0,"sent":0,"cutoff":"2025-08-13 10:32:02"}
+[2025-08-13 10:48:07] [SELFSCAN] ran: {"considered":0,"sent":0,"cutoff":"2025-08-13 10:45:07"}
+[2025-08-13 10:48:39] PubSub SUCCESS: survey_started
+[2025-08-13 10:48:39] Survey started (welcome)
+[2025-08-13 10:48:56] PubSub SUCCESS: page_submit
+[2025-08-13 10:48:56] [INFO] Step 1 entered → Previous step (0) answers sent from POST (beforeControllerAction).
+[2025-08-13 10:49:06] PubSub SUCCESS: page_submit
+[2025-08-13 10:49:06] [INFO] Step 2 entered → Previous step (1) answers sent from POST (beforeControllerAction).
+[2025-08-13 10:49:16] [SELFSCAN] ran: {"considered":0,"sent":0,"cutoff":"2025-08-13 10:46:16"}
+[2025-08-13 10:49:16] PubSub SUCCESS: page_submit
+[2025-08-13 10:49:16] [INFO] Step 3 entered → Previous step (2) answers sent from POST (beforeControllerAction).
+[2025-08-13 10:49:20] PubSub SUCCESS: page_submit
+[2025-08-13 10:49:20] [INFO] Step 4 entered → Previous step (3) answers sent from POST (beforeControllerAction).
+[2025-08-13 10:49:24] PubSub SUCCESS: page_submit
+[2025-08-13 10:49:24] [INFO] Step 5 entered → Previous step (4) answers sent from POST (beforeControllerAction).
+[2025-08-13 10:49:27] PubSub SUCCESS: page_submit
+[2025-08-13 10:49:27] [INFO] Step 6 entered → Previous step (5) answers sent from POST (beforeControllerAction).
+[2025-08-13 10:49:28] PubSub SUCCESS: survey_completed
+[2025-08-13 10:49:28] [INFO] Survey completed successfully. Duration (sec): 51
+[2025-08-13 11:37:00] [SELFSCAN] ran: {"considered":0,"sent":0,"cutoff":"2025-08-13 11:34:00"}
+[2025-08-13 11:38:22] [SELFSCAN] ran: {"considered":0,"sent":0,"cutoff":"2025-08-13 11:35:22"}
+[2025-08-13 13:19:52] [SELFSCAN] ran: {"considered":0,"sent":0,"cutoff":"2025-08-13 13:16:52"}
+[2025-08-13 13:20:53] [SELFSCAN] ran: {"considered":0,"sent":0,"cutoff":"2025-08-13 13:17:53"}
+[2025-08-13 13:22:15] [SELFSCAN] ran: {"considered":0,"sent":0,"cutoff":"2025-08-13 13:19:15"}
+[2025-08-13 13:25:48] [SELFSCAN] ran: {"considered":0,"sent":0,"cutoff":"2025-08-13 13:22:48"}

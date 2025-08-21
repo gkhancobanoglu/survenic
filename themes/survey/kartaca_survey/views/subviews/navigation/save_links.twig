@@ -1,0 +1,113 @@
+{#
+
+{% if aSurveyInfo.aNavigator.load.show == "Y" %}
+    <!-- Load unfinished survey button -->
+    <li class="nav-item ls-no-js-hidden px-2">
+        <a href="#"
+           data-limesurvey-submit='{ "loadall":"loadall" }'
+           class="minimal-save-link minimal-save-link-outline ls-link-loadall"
+           title="{{ gT('Load unfinished survey') }}"
+        >
+            {{ gT('Load unfinished survey') }}
+        </a>
+    </li>
+{% endif %}
+
+{% if aSurveyInfo.aNavigator.save.show == "Y" %}
+    <!-- Resume later button -->
+    <li class="nav-item ls-no-js-hidden px-2">
+        <a href="#"
+           data-limesurvey-submit='{ "saveall":"saveall" }'
+           class="minimal-save-link minimal-save-link-primary"
+           title="{{ gT('Resume later') }}"
+        >
+            {{ gT('Resume later') }}
+        </a>
+        {% if(aSurveyInfo.saved.text and aSurveyInfo.options.showpopups > 0) %}
+            <span class="minimal-save-feedback" id="minimal-save-feedback-link">
+                {{ aSurveyInfo.saved.text }}
+            </span>
+            <script>
+                setTimeout(function(){
+                    var el = document.getElementById('minimal-save-feedback-link');
+                    if(el) el.style.opacity = 0;
+                }, 3000);
+            </script>
+        {% endif %}
+    </li>
+{% endif %}
+
+<style>
+    .minimal-save-link {
+        font-size: 0.98rem;
+        font-weight: 500;
+        border-radius: 6px;
+        padding: 0.38rem 1.05rem;
+        border: none;
+        background: none;
+        box-shadow: none;
+        transition: background 0.16s, color 0.16s, border 0.16s;
+        outline: none;
+        display: inline-block;
+        cursor: pointer;
+        margin: 0.1rem 0.3rem 0.1rem 0;
+        text-decoration: none;
+        letter-spacing: 0.01em;
+    }
+    .minimal-save-link:focus {
+        outline: 2px solid #0d6efd44;
+        outline-offset: 2px;
+    }
+    .minimal-save-link-primary {
+        color: #2563eb !important;
+        background: #fff;
+        border: 1.5px solid #dbeafe;
+    }
+    .minimal-save-link-primary:hover {
+        background: #e9f5ff;
+        color: #0d6efd !important;
+        border-color: #b6e0fe;
+    }
+    .minimal-save-link-outline {
+        color: #2563eb !important;
+        background: #fff;
+        border: 1.5px solid #dbeafe;
+    }
+    .minimal-save-link-outline:hover {
+        background: #e9f5ff;
+        color: #0d6efd !important;
+        border-color: #b6e0fe;
+    }
+    .minimal-save-feedback {
+        display: inline-block;
+        background: #f3fdf7;
+        color: #1a6c3a;
+        border-radius: 5px;
+        font-size: 0.93rem;
+        font-weight: 400;
+        margin-left: 0.7rem;
+        padding: 0.22rem 0.7rem;
+        box-shadow: none;
+        opacity: 1;
+        transition: opacity 0.5s;
+        animation: minimalFadeIn 0.4s;
+    }
+    @keyframes minimalFadeIn {
+        from { opacity: 0; transform: translateY(6px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 600px) {
+        .minimal-save-link {
+            font-size: 0.95rem;
+            padding: 0.32rem 0.7rem;
+            width: 100%;
+        }
+        .minimal-save-feedback {
+            font-size: 0.91rem;
+            padding: 0.18rem 0.5rem;
+            margin-left: 0.2rem;
+        }
+    }
+</style>
+
+#}

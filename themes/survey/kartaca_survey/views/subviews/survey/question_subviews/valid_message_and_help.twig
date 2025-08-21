@@ -1,0 +1,78 @@
+{#
+    (¯`·._.·(¯`·._.· Valid message and helper  ·._.·´¯)·._.·´¯)
+
+    This file renders the validation messages.
+#}
+
+<!-- LimeSurvey valid message and help -->
+<div class="{{ aSurveyInfo.class.questionvalidcontainer }} col-12">
+    {% if aQuestion.man_message %}
+        <div class="modern-valid-message modern-valid-message-danger">
+            {{ aQuestion.man_message|replace({'<i class="fa fa-question-circle"></i>': ''}) | raw }}
+        </div>
+    {% endif %}
+    {% if aQuestion.file_valid_message %}
+        <div class="modern-valid-message modern-valid-message-warning">
+            {{ aQuestion.file_valid_message|replace({'<i class="fa fa-question-circle"></i>': ''}) | raw }}
+        </div>
+    {% endif %}
+    {# ls-questionhelp ve benzeri hint/help metinleri tamamen kaldırıldı #}
+</div>
+
+<style>
+    .modern-valid-message {
+        display: block;
+        border-radius: 0.45em;
+        font-size: 1rem;
+        line-height: 1.5;
+        padding: 0.65em 1em;
+        margin: 0.35em 0 0.55em 0;
+        font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+        font-weight: 400;
+        word-break: break-word;
+        animation: modern-valid-fadein 0.5s;
+        border: 1px solid #ececec;
+        background: #fcfcfc;
+        color: #444;
+        transition: box-shadow 0.2s, background 0.2s;
+    }
+    .modern-valid-message-warning {
+        background: #fff9f2;
+        color: #a86a1c;
+        border-color: #f5e2b7;
+    }
+    .modern-valid-message-danger {
+        background: #fff5f5;
+        color: #b13a3a;
+        border-color: #f5b7b7;
+    }
+    .modern-valid-message strong {
+        font-weight: 600;
+        color: inherit;
+    }
+    .modern-valid-message em {
+        font-style: italic;
+        color: inherit;
+    }
+    .modern-valid-message a {
+        color: #2563eb;
+        text-decoration: underline;
+        font-weight: 500;
+    }
+    .modern-valid-message a:hover {
+        color: #1d4ed8;
+        text-decoration: underline;
+    }
+    @media (max-width: 700px) {
+        .modern-valid-message {
+            font-size: 0.95rem;
+            padding: 0.5em 0.5em;
+        }
+    }
+    @keyframes modern-valid-fadein {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: none; }
+    }
+    .ls-questionhelp { display: none !important; }
+</style>

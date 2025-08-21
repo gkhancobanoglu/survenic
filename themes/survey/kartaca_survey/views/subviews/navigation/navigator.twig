@@ -1,0 +1,100 @@
+{% set aNavigator = aSurveyInfo.aNavigator %}
+
+<div class="{{ aSurveyInfo.class.navigatorcontainer }} row navigator space-col modern-navigator-container no-bg"
+     id="{{ aSurveyInfo.id.navigatorcontainer }}" {{ aSurveyInfo.attr.navigatorcontainer }}>
+    <div class="modern-navigator-btnrow stretch">
+        <div class="{{ aSurveyInfo.class.navigatorbuttonl }} modern-navigator-btncol align-left"
+             {{ aSurveyInfo.attr.navigatorbuttonl }}>
+            {% if (not aSurveyInfo.popupPreview) and aNavigator.aMovePrev.show %}
+                <button {{ aSurveyInfo.attr.navigatorbuttonprev }} accesskey="p"
+                        class="{{ aNavigator.disabled }} {{ aSurveyInfo.class.navigatorbuttonprev }} modern-navigator-btn modern-navigator-btn-outline">
+                    <span class="modern-navigator-btn-content">
+                        <span class="modern-navigator-icon" aria-hidden="true">&#8592;</span>
+                        <span>{{ gT("Previous") }}</span>
+                    </span>
+                </button>
+            {% endif %}
+        </div>
+        <div class="{{ aSurveyInfo.class.navigatorbuttonr }} modern-navigator-btncol align-right">
+            {% if (not aSurveyInfo.popupPreview) and aNavigator.aMoveNext.show %}
+                {% if aNavigator.aMoveNext.value == "movesubmit" %}
+                    <button {{ aSurveyInfo.attr.navigatorbuttonsubmit }} accesskey="n"
+                            class="{{ aNavigator.disabled }} {{ aSurveyInfo.class.navigatorbuttonsubmit }} modern-navigator-btn modern-navigator-btn-primary">
+                        <span class="modern-navigator-btn-content">
+                            <span class="modern-navigator-icon" aria-hidden="true">&#10003;</span>
+                            <span>{{ gT("Submit") }}</span>
+                        </span>
+                    </button>
+                {% else %}
+                    <button {{ aSurveyInfo.attr.navigatorbuttonnext }} accesskey="n"
+                            class="{{ aNavigator.disabled }} {{ aSurveyInfo.class.navigatorbuttonnext }} modern-navigator-btn modern-navigator-btn-primary">
+                        <span class="modern-navigator-btn-content">
+                            <span>{{ gT("Next") }}</span>
+                            <span class="modern-navigator-icon" aria-hidden="true">&#8594;</span>
+                        </span>
+                    </button>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{{ include('./subviews/navigation/navigator_complement.twig') }}
+
+<style>
+    .modern-navigator-container {
+        margin: 2.2rem 0 1.2rem 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    .modern-navigator-btnrow {
+        display: flex;
+        justify-content: space-between; 
+        width: 100%;                    
+        max-width: 750px;               
+        margin: 0 auto;                 
+    }
+
+    .modern-navigator-btn {
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 8px;
+        padding: 0.6rem 1rem;
+        border: none;
+        width: 150px;
+        height: 45px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+        cursor: pointer;
+    }
+
+    .modern-navigator-btn-primary {
+        background: linear-gradient(90deg, #0d6efd 0%, #3b82f6 100%);
+        color: #fff;
+    }
+
+    .modern-navigator-btn-primary:hover {
+        background: linear-gradient(90deg, #2563eb 0%, #0d6efd 100%);
+    }
+
+    .modern-navigator-btn-outline {
+        background: #fff;
+        color: #0d6efd;
+        border: 2px solid #0d6efd;
+    }
+
+    .modern-navigator-btn-outline:hover {
+        background: #e9f5ff;
+        color: #2563eb;
+        border-color: #2563eb;
+    }
+
+    .modern-navigator-icon {
+        font-size: 1.1em;
+    }
+</style>

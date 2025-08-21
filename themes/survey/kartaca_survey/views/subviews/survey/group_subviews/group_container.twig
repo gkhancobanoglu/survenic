@@ -1,0 +1,36 @@
+{#
+    (¯`·._.·(¯`·._.· Group Container  ·._.·´¯)·._.·´¯)
+
+
+    The container div itself could often change from a template to another, so we clearly separate it.
+    NOTE: see views/subviews/survey/group.twig comments for more infos
+#}
+
+<div class="{{ aSurveyInfo.class.groupcontainer }} space-col" {{ aSurveyInfo.attr.groupcontainer }}>
+
+    {# Group Name #}
+    {{ include('./subviews/survey/group_subviews/group_name.twig') }}
+
+    {# Group Description #}
+    {{ include('./subviews/survey/group_subviews/group_desc.twig') }}
+
+    {#
+        PRESENT THE QUESTIONS
+
+        This is the main part. It will render each question for this group
+     #}
+
+    <!-- PRESENT THE QUESTIONS -->
+    {% for  aQuestion in aGroup.aQuestions %}
+         {{ include('./subviews/survey/question_container.twig') }}
+    {% endfor %}
+
+    <!-- Hidden inputs -->
+    {% if aGroup.show_last_group == true %}
+        <input type='hidden' name='lastgroup' value='{{ aGroup.lastgroup }}' id='lastgroup' />
+    {% endif %}
+
+    {% if aGroup.show_last_answer == true %}
+        <input type='hidden' name='lastanswer' value='{{ aGroup.lastanswer }}' id='lastanswer' />
+    {% endif %}
+</div>

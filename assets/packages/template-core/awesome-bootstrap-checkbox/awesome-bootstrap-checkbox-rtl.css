@@ -1,0 +1,138 @@
+.checkbox-item {
+  padding-right: 20px;
+}
+.checkbox-item label {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  padding-right: 5px;
+}
+
+
+.checkbox-item input[type="checkbox"] {
+  opacity: 0;
+  z-index: -1;
+  position: absolute;
+  right: 0;
+}
+
+.checkbox-item input[type="checkbox"]:focus + label::before,
+.checkbox-item input[type="radio"]:focus + label::before {
+  outline: none;
+}
+
+.checkbox-item input[type="checkbox"]:checked + label::after,
+.checkbox-item input[type="radio"]:checked + label::after {
+  /* font-family: "FontAwesome"; */
+  /* content: "\f00c"; */
+  content: none;
+}
+
+.checkbox-item input[type="checkbox"]:indeterminate + label::after,
+.checkbox-item input[type="radio"]:indeterminate + label::after {
+  display: none;
+}
+
+.checkbox-item input[type="checkbox"]:disabled + label,
+.checkbox-item input[type="radio"]:disabled + label {
+  opacity: 0.65;
+}
+
+.checkbox-item input[type="checkbox"]:disabled + label::before,
+.checkbox-item input[type="radio"]:disabled + label::before {
+  background-color: transparent;
+  cursor: not-allowed;
+}
+
+.checkbox-item.checkbox-circle label::before {
+  border-radius: 0;
+}
+
+.checkbox-item.checkbox-inline {
+  margin-top: 0;
+}
+
+.checkbox-primary input[type="checkbox"]:checked + label::before,
+.checkbox-primary input[type="radio"]:checked + label::before,
+.checkbox-primary input[type="checkbox"]:checked + label::after,
+.checkbox-primary input[type="radio"]:checked + label::after,
+.checkbox-danger input[type="checkbox"]:checked + label::before,
+.checkbox-danger input[type="radio"]:checked + label::before,
+.checkbox-danger input[type="checkbox"]:checked + label::after,
+.checkbox-danger input[type="radio"]:checked + label::after,
+.checkbox-info input[type="checkbox"]:checked + label::before,
+.checkbox-info input[type="radio"]:checked + label::before,
+.checkbox-info input[type="checkbox"]:checked + label::after,
+.checkbox-info input[type="radio"]:checked + label::after,
+.checkbox-warning input[type="checkbox"]:checked + label::before,
+.checkbox-warning input[type="radio"]:checked + label::before,
+.checkbox-warning input[type="checkbox"]:checked + label::after,
+.checkbox-warning input[type="radio"]:checked + label::after,
+.checkbox-success input[type="checkbox"]:checked + label::before,
+.checkbox-success input[type="radio"]:checked + label::before,
+.checkbox-success input[type="checkbox"]:checked + label::after,
+.checkbox-success input[type="radio"]:checked + label::after {
+  background-color: transparent;
+  border-color: transparent;
+  color: inherit;
+}
+
+.radio-item {
+  padding-right: 20px;
+}
+.radio-item label {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  padding-right: 5px;
+}
+
+.radio-item input[type="radio"] {
+  opacity: 0;
+  z-index: 1;
+  top: 0;
+}
+
+.radio-item input[type="radio"]:focus + label::before {
+  outline: none;
+}
+
+.radio-item input[type="radio"]:disabled + label {
+  opacity: 0.65;
+}
+.radio-item input[type="radio"]:disabled + label::before {
+  cursor: not-allowed;
+}
+.radio-item.radio-inline {
+  margin-top: 0;
+}
+
+.radio-primary input[type="radio"] + label::after,
+.radio-primary input[type="radio"]:checked + label::before,
+.radio-primary input[type="radio"]:checked + label::after,
+.radio-danger input[type="radio"] + label::after,
+.radio-danger input[type="radio"]:checked + label::before,
+.radio-danger input[type="radio"]:checked + label::after,
+.radio-info input[type="radio"] + label::after,
+.radio-info input[type="radio"]:checked + label::before,
+.radio-info input[type="radio"]:checked + label::after,
+.radio-warning input[type="radio"] + label::after,
+.radio-warning input[type="radio"]:checked + label::before,
+.radio-warning input[type="radio"]:checked + label::after,
+.radio-success input[type="radio"] + label::after,
+.radio-success input[type="radio"]:checked + label::before,
+.radio-success input[type="radio"]:checked + label::after {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+input[type="checkbox"].styled:checked + label:after,
+input[type="radio"].styled:checked + label:after {
+  content: none;
+}
+input[type="checkbox"] .styled:checked + label::before,
+input[type="radio"] .styled:checked + label::before,
+input[type="checkbox"] .styled:checked + label::after,
+input[type="radio"] .styled:checked + label::after {
+  color: inherit;
+}

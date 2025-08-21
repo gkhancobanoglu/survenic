@@ -1,0 +1,84 @@
+
+{#
+    (¯`·._.·(¯`·._.· Registration errors._.·´¯)·._.·´¯)
+
+    If there where errors on registration show them here
+
+#}
+{% if aSurveyInfo.errors is not empty %}
+    <div class="modern-register-error-block">
+        <div class="modern-register-error-icon">&#10060;</div>
+        <div class="modern-register-error-title">{{ gT("Registration error") }}</div>
+        <ul class='{{ aSurveyInfo.class.registerul }} modern-register-error-list' {{ aSurveyInfo.attr.registerul }} >
+            {% for error in aSurveyInfo.errors  %}
+                <li class="modern-register-error-listitem" {{ aSurveyInfo.attr.registerulli }} >{{ error }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+<style>
+    .modern-register-error-block {
+        background: linear-gradient(135deg, #fff0f0 0%, #ffeaea 100%);
+        border-radius: 16px;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+        color: #b3261e;
+        font-size: 1.08rem;
+        padding: 2.1rem 2.2rem 1.5rem 2.2rem;
+        margin: 2.2rem auto 1.5rem auto;
+        max-width: 480px;
+        text-align: center;
+        border: none;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.1rem;
+    }
+    .modern-register-error-icon {
+        font-size: 2.2rem;
+        color: #b3261e;
+        margin-bottom: 0.2rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .modern-register-error-title {
+        font-size: 1.18rem;
+        font-weight: 700;
+        color: #b3261e;
+        margin-bottom: 0.7rem;
+        letter-spacing: -0.5px;
+    }
+    .modern-register-error-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .modern-register-error-listitem {
+        display: block;
+        background: #fff;
+        border-radius: 8px;
+        padding: 0.7em 1.1em;
+        font-size: 1.04rem;
+        color: #b3261e;
+        font-weight: 500;
+        box-shadow: 0 1px 4px rgba(179,38,30,0.04);
+        text-align: left;
+    }
+    @media (max-width: 600px) {
+        .modern-register-error-block {
+            padding: 1.1rem 0.5rem 1.1rem 0.5rem;
+            max-width: 98vw;
+        }
+        .modern-register-error-listitem {
+            font-size: 0.98rem;
+            padding: 0.5em 0.7em;
+        }
+    }
+</style>

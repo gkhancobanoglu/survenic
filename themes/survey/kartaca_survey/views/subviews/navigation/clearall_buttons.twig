@@ -1,0 +1,66 @@
+{#
+    This file render the exit button accessible without javascript
+#}
+
+<style>
+    .modern-clearall-wrapper {
+        background: #fff0f0;
+        border-radius: 10px;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.07);
+        padding: 1.1rem 1.2rem 1.1rem 1.2rem;
+        margin: 1.2rem 0 1.2rem 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.7rem;
+    }
+    .modern-clearall-label {
+        font-size: 1.01rem;
+        color: #b3261e;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .modern-clearall-checkbox {
+        accent-color: #b3261e;
+        width: 1.1em;
+        height: 1.1em;
+        border-radius: 4px;
+        margin-right: 0.5rem;
+    }
+    .modern-clearall-btn {
+        font-size: 0.98rem;
+        font-weight: 500;
+        border-radius: 7px;
+        padding: 0.38rem 1.1rem;
+        background: #b3261e;
+        color: #fff;
+        border: none;
+        transition: background 0.16s, color 0.16s;
+        outline: none;
+        cursor: pointer;
+        margin-top: 0.3rem;
+    }
+    .modern-clearall-btn:focus, .modern-clearall-btn:hover {
+        background: #a31515;
+        color: #fff;
+    }
+    @media (max-width: 600px) {
+        .modern-clearall-wrapper {
+            padding: 0.7rem 0.5rem;
+        }
+        .modern-clearall-btn {
+            font-size: 0.95rem;
+            padding: 0.32rem 0.7rem;
+            width: 100%;
+        }
+    }
+</style>
+
+<div class="{{ aSurveyInfo.class.clearallwrapper }} modern-clearall-wrapper">
+    <label class="col-form-label fw-bold modern-clearall-label {{ aSurveyInfo.class.clearalllabel }}">
+        <input {{ aSurveyInfo.attr.clearallconfirm }} class="me-2 modern-clearall-checkbox {{ aSurveyInfo.class.clearallconfirm }}"><span class="control-label">{{gT("Please confirm you want to clear your response?")}}</span>
+    </label>
+    <button {{ aSurveyInfo.attr.clearallbutton }} class="{{ aSurveyInfo.class.clearallbutton }} modern-clearall-btn" title="{{ gT("This action need to be confirmed.") }}">{{gT("Exit and clear survey")}}</button>
+</div>

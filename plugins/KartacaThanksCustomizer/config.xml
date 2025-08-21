@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <metadata>
+    <name>KartacaThanksCustomizer</name>
+    <type>plugin</type>
+    <class>KartacaThanksCustomizer</class>
+    <creationDate>2025-08-19</creationDate>
+    <last_update>2025-08-19</last_update>
+    <author>Gökhan Çobanoğlu</author>
+    <authorUrl>https://kartaca.com</authorUrl>
+    <version>1.0.0</version>
+    <license>Licensed by Kartaca</license>
+    <description><![CDATA[
+      Allows you to customize the completion (submit) screen title and image.
+    ]]></description>
+  </metadata>
+  <compatibility>
+    <version>5.0</version>
+    <version>5.1</version>
+    <version>5.2</version>
+    <version>6.0</version>
+    <version>6.1</version>
+    <version>6.2</version>
+  </compatibility>
+</config>

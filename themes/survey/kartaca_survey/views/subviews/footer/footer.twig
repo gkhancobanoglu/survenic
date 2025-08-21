@@ -1,0 +1,66 @@
+<footer class="modern-footer">
+    <div class="footer-content">
+        <span class="footer-brand">Survenic</span>
+        <span class="footer-copyright">© {{ "now"|date("Y") }} All rights reserved</span>
+        <span class="footer-powered">Powered by <a href="https://kartaca.com" target="_blank" class="kartaca-link">Kartaca</a></span>
+    </div>
+</footer>
+
+<style>
+html, body {
+    height: 100%;
+    margin: 0;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding-bottom: 0 !important;
+}
+
+.modern-footer {
+    width: 100%;
+    background: #f4f5f7;
+    color: #555;
+    border-top: 1px solid #e4ecf7;
+    text-align: center;
+    padding: 1.2em 0 1.2em 0;
+    font-size: 1.05rem;
+    margin-top: auto; 
+    box-shadow: 0 -2px 12px 0 rgba(34,41,47,0.04);
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3em;
+}
+.footer-brand {
+    font-weight: 700;
+    color: #295fa6;
+    letter-spacing: 1px;
+    font-size: 1.1em;
+}
+.footer-powered {
+    font-size: 0.9em;
+    color: #666;
+}
+.kartaca-link {
+    color: #295fa6;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+.kartaca-link:hover {
+    color: #1e4c8a;
+    text-decoration: none;
+}
+
+@media (max-width: 600px) {
+    .modern-footer {
+        font-size: 0.98rem;
+        padding: 0.8em 0;
+    }
+}
+</style>

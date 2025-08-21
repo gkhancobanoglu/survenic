@@ -1,0 +1,39 @@
+{#
+    (¯`·._.·(¯`·._.·  Test Welcome / Privacy for All in one mode  ·._.·´¯)·._.·´¯)
+
+    This file is only a piece of logic, it doesn't show nothing. We use it to hide complexity in layout.twig
+
+    When survey is in All In One mode, if welcome or privacy message are activated, they must be shown on the page.
+#}
+{% if aSurveyInfo.format == 'A' %}
+    <div class="modern-allinone-welcome-privacy">
+        {% if not aSurveyInfo.showwelcome is defined or not aSurveyInfo.showwelcome != 'N' %}
+            <div class="modern-allinone-welcome-block">
+                {{ include('./subviews/messages/welcome.twig') }}
+            </div>
+        {% endif %}
+        <div class="modern-allinone-privacy-block">
+            {{ include('./subviews/privacy/privacy.twig') }}
+        </div>
+    </div>
+    <style>
+        .modern-allinone-welcome-privacy {
+            display: flex;
+            flex-direction: column;
+            gap: 2.2rem;
+            margin: 2.2rem 0 1.2rem 0;
+        }
+        .modern-allinone-welcome-block {
+            margin-bottom: 0.5rem;
+        }
+        .modern-allinone-privacy-block {
+            margin-top: 0.5rem;
+        }
+        @media (max-width: 700px) {
+            .modern-allinone-welcome-privacy {
+                gap: 1.2rem;
+                margin: 1.1rem 0 0.7rem 0;
+            }
+        }
+    </style>
+{% endif %}

@@ -1,0 +1,85 @@
+{% if (intval(aSurveyInfo.options.showpopups) >= 0 and aSurveyInfo.saved.text) %}
+    {% set savedClass = 'success' %}
+    {% if (not aSurveyInfo.saved.success) %}
+        {% set savedClass = 'error' %}
+    {% endif %}
+    {% if (aSurveyInfo.active != "Y") %}
+        {% set savedClass = 'info' %}
+    {% endif %}
+    <div class="alert alert-{{ savedClass }} alert-dismissible modern-saved-alert fade in{% if(intval(aSurveyInfo.options.showpopups) > 0) %} ls-js-hidden{% endif %}" role="alert">
+        <button class="btn-close ls-no-js-hidden modern-saved-close" data-bs-dismiss="alert"><span class="visually-hidden">{{ gT("Close") }}</span></button>
+        {{ aSurveyInfo.saved.text }}
+    </div>
+    <style>
+        .modern-saved-alert {
+            background: linear-gradient(135deg, #f8fafc 0%, #e9f5ff 100%);
+            border-radius: 14px;
+            border: none;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+            color: #222;
+            font-size: 1.05rem;
+            padding: 1.1rem 1.5rem 1.1rem 1.2rem;
+            margin: 1.2rem auto;
+            max-width: 420px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            opacity: 0;
+            animation: modernFadeIn 0.5s forwards;
+        }
+        .modern-saved-alert.alert-success {
+            background: linear-gradient(135deg, #e6f9f0 0%, #d2f4ea 100%);
+            color: #1a6c3a;
+        }
+        .modern-saved-alert.alert-error {
+            background: linear-gradient(135deg, #fff0f0 0%, #ffeaea 100%);
+            color: #b3261e;
+        }
+        .modern-saved-alert.alert-info {
+            background: linear-gradient(135deg, #eaf4ff 0%, #dbeafe 100%);
+            color: #1e3a8a;
+        }
+        .modern-saved-close {
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            color: #888;
+            position: absolute;
+            top: 0.7rem;
+            right: 1rem;
+            cursor: pointer;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s, color 0.2s;
+        }
+        .modern-saved-close:hover {
+            background: #f0f0f0;
+            color: #d00;
+        }
+        @keyframes modernFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 600px) {
+            .modern-saved-alert {
+                max-width: 98vw;
+                font-size: 1rem;
+                padding: 1rem 0.7rem 1rem 1rem;
+            }
+        }
+    </style>
+    <script>
+        setTimeout(function() {
+            var alert = document.querySelector('.modern-saved-alert');
+            if(alert) {
+                alert.style.transition = 'opacity 0.5s';
+                alert.style.opacity = 0;
+                setTimeout(function(){ if(alert.parentNode) alert.parentNode.removeChild(alert); }, 600);
+            }
+        }, 3000);
+    </script>
+{% endif %}

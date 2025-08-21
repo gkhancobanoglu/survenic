@@ -1,0 +1,94 @@
+<div class="optin-container">
+    <div class="optin-card">
+        <div class="optin-header">
+            <i class="fa fa-envelope-open-text optin-icon"></i>
+            <h1 class="optin-title">{{ gT('Abonelikten Çık') }}</h1>
+        </div>
+        <div class="optin-message">
+            <p>{{ aSurveyInfo.optin_message }}</p>
+        </div>
+        {% if aSurveyInfo.optin_link %}
+            <div class="optin-actions">
+                <a href="{{ aSurveyInfo.optin_link }}" class="optin-btn">
+                    <i class="fa fa-check"></i> {{ gT('I confirm') }}
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+<style>
+.optin-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0.5rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #e4ecf7 100%);
+}
+.optin-card {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px 0 rgba(34,41,47,0.08);
+    padding: 2.2rem 2rem 2rem 2rem;
+    max-width: 420px;
+    width: 100%;
+    margin: 0 auto;
+    font-size: 1.08rem;
+    color: #222;
+    text-align: center;
+}
+.optin-header {
+    margin-bottom: 1.2rem;
+}
+.optin-icon {
+    font-size: 2.2rem;
+    color: #295fa6;
+    margin-bottom: 0.5rem;
+}
+.optin-title {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #295fa6;
+    margin-bottom: 0.3rem;
+}
+.optin-message {
+    margin-bottom: 1.5rem;
+    color: #444;
+    font-size: 1.08rem;
+}
+.optin-actions {
+    margin-top: 1.2rem;
+}
+.optin-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8em 2em;
+    font-size: 1.08rem;
+    font-weight: 600;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #295fa6 0%, #4a8cff 100%);
+    color: #fff !important;
+    text-decoration: none;
+    border: none;
+    box-shadow: 0 4px 15px rgba(41,95,166,0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.optin-btn:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(41,95,166,0.25);
+}
+@media (max-width: 600px) {
+    .optin-card {
+        padding: 1.2rem 0.5rem 1rem 0.5rem;
+        font-size: 1em;
+    }
+    .optin-title {
+        font-size: 1.05rem;
+    }
+    .optin-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+</style>

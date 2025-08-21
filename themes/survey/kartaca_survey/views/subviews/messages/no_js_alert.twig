@@ -1,0 +1,15 @@
+{#
+    (¯`·._.·(¯`·._.· No JavaScript Alert  ·._.·´¯)·._.·´¯)
+
+    If JavaScript is not enabled, this alert will appear on the screen.
+
+#}
+
+
+<!-- No JavaScript alert -->
+<div class='{{ aSurveyInfo.class.nojs  }} alert alert-danger '  {{ aSurveyInfo.attr.nojs  }} data-type='checkjavascript'>
+    {{
+        "Caution: JavaScript execution is disabled in your browser or for this website. You may not be able to answer all questions in this survey. Please, verify your browser parameters."
+        | t
+    }}
+</div>

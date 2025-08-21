@@ -1,0 +1,95 @@
+{#
+    (¯`·._.·(¯`·._.· Registration message._.·´¯)·._.·´¯)
+
+    If there is a message on the registration page, like "Survey has not started, or Register now! here it is displayed
+
+#}
+
+{% if registerSuccess %}
+    <div class="modern-register-info-block modern-register-info-success">
+        <div class="modern-register-info-icon">&#128231;</div>
+        <div class="modern-register-info-title">{{ gT("Thank you for registering. You will receive an email shortly.") }}</div>
+    </div>
+{% else %}
+    <div class="modern-register-info-block modern-register-info-warning">
+        <div class="modern-register-info-icon">&#8505;</div>
+        <div class="modern-register-info-title">
+            {% if sStartDate %}
+                {{ gT("You may register for this survey but you have to wait for the {{sStartDate}} before starting the survey.") }}
+            {% else %}
+                {{ gT("You may register for this survey if you wish to take part.") }}
+            {% endif %}
+        </div>
+        <div class="modern-register-info-desc">{{ gT("Enter your details below, and an email containing the link to participate in this survey will be sent immediately.") }}</div>
+    </div>
+{% endif %}
+
+{% if  not empty(aSurveyInfo.aErrors) %}
+    <div class="modern-register-info-block modern-register-info-error">
+        <div class="modern-register-info-icon">&#10060;</div>
+        <div class="modern-register-info-title">
+            {% for  key, error in aSurveyInfo.aErrors%}
+                <div>{{ error }}</div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+
+<style>
+    .modern-register-info-block {
+        border-radius: 14px;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.07);
+        font-size: 1.08rem;
+        padding: 1.5rem 2.2rem 1.2rem 2.2rem;
+        margin: 2.2rem auto 1.5rem auto;
+        max-width: 540px;
+        text-align: center;
+        border: none;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.7rem;
+    }
+    .modern-register-info-success {
+        background: linear-gradient(135deg, #e6f9f0 0%, #d2f4ea 100%);
+        color: #1a6c3a;
+    }
+    .modern-register-info-warning {
+        background: linear-gradient(135deg, #eaf4ff 0%, #dbeafe 100%);
+        color: #1e3a8a;
+    }
+    .modern-register-info-error {
+        background: linear-gradient(135deg, #fff0f0 0%, #ffeaea 100%);
+        color: #b3261e;
+    }
+    .modern-register-info-icon {
+        font-size: 2rem;
+        margin-bottom: 0.2rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .modern-register-info-title {
+        font-size: 1.13rem;
+        font-weight: 700;
+        margin-bottom: 0.3rem;
+        letter-spacing: -0.5px;
+    }
+    .modern-register-info-desc {
+        font-size: 1.01rem;
+        font-weight: 500;
+        color: #2563eb;
+        margin-top: 0.2rem;
+    }
+    @media (max-width: 600px) {
+        .modern-register-info-block {
+            padding: 1.1rem 0.5rem 1.1rem 0.5rem;
+            max-width: 98vw;
+        }
+        .modern-register-info-title {
+            font-size: 1.01rem;
+        }
+    }
+</style>

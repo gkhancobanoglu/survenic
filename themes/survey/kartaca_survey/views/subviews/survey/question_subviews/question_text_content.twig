@@ -1,0 +1,67 @@
+<div class="modern-question-text-wrapper">
+    {% if (aShow.question_number) %}
+        <span class='modern-question-number' {{ aSurveyInfo.attr.questionnumber }}>
+            {{ aQuestion.number }}
+        </span>
+    {% endif %}
+
+    {% if (aShow.question_code) %}
+        <span class='modern-question-code' {{ aSurveyInfo.attr.questioncode }}>
+            {{ aQuestion.code }}
+        </span>
+    {% endif %}
+
+    <div class="modern-question-title-block" {{ aSurveyInfo.attr.questiontext }}>
+        <div id="ls-question-text-{{ aQuestion.SGQ }}" class="modern-question-title" {{ aSurveyInfo.attr.lsquestiontext }}>
+            {{ aQuestion.text | raw }}
+            {% if (aQuestion.mandatory == 'Y') %}
+                {{ include('./subviews/survey/question_subviews/asterisk.twig') }}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<style> 
+    .modern-question-text-wrapper {
+        margin-bottom: 0.8rem;
+        padding-left: 0.2rem;
+        padding-right: 0.2rem;
+    }
+
+    .modern-question-number,
+    .modern-question-code {
+        font-size: 0.95rem;
+        color: #64748b;
+        font-weight: 500;
+        margin-right: 0.6em;
+        opacity: 0.8;
+        vertical-align: middle;
+    }
+
+    .modern-question-title-block {
+        margin-top: 0.3rem;
+    }
+
+    .modern-question-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #1e3a8a;
+        letter-spacing: -0.4px;
+        line-height: 1.35;
+        font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+        word-break: break-word;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4em;
+    }
+
+    @media (max-width: 768px) {
+        .modern-question-title {
+            font-size: 1.05rem;
+        }
+        .modern-question-number,
+        .modern-question-code {
+            font-size: 0.88rem;
+        }
+    }
+</style>

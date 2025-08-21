@@ -1,0 +1,216 @@
+
+    {# This will display the script and the hidden inputs needed for ExpressionScript Engine #}
+    {{ aSurveyInfo.EM.ScriptsAndHiddenInputs }}
+    <div class="load-container">
+        <div class="load-card">
+            <div class="load-header">
+                <i class="fa fa-sign-in-alt load-icon"></i>
+                <h1 class="load-title">{{ gT('Kaydedilmiş Anketi Yükle') }}</h1>
+                <p class="load-desc">Daha önce kaydettiğin anketi buradan yükleyip devam edebilirsin.</p>
+            </div>
+            <div class="load-step">
+                <ol class="load-steps">
+                    <li><b>Adım 1:</b> Kaydederken kullandığın isim ve şifreyi gir.</li>
+                    <li><b>Adım 2:</b> (Varsa) Güvenlik kodunu gir.</li>
+                    <li><b>Adım 3:</b> Yükle butonuna tıkla ve ankete devam et.</li>
+                </ol>
+            </div>
+            <div class="load-messages">
+                {% if count(aSurveyInfo.aLoadForm.aErrors) > 0 %}
+                    <div class="alert alert-danger load-alert">
+                        <ul class="list-unstyled">
+                            {% for key,error in aSurveyInfo.aLoadForm.aErrors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                <div class="alert alert-info load-info">
+                    <p>{{ gT("Kaydedilmiş anketini yüklemek için bilgilerini girmen yeterli.") }}</p>
+                </div>
+            </div>
+            <div class="load-form-area">
+                {{
+                    C.Html.form(
+                        ( aSurveyInfo.surveyUrl ),
+                        'post',
+                        {
+                            'id': 'form-load',
+                            'name': 'form-load',
+                            'class': 'ls-form',
+                        }
+                    )
+                }}
+                    {{ aSurveyInfo.aLoadForm.sHiddenField }}
+                    <div class="load-form-fields">
+                        <input id="savename" name="savename" class="load-input" type="text" required placeholder="{{ gT('Kaydedilen İsim (zorunlu)') }}" />
+                        <input id="savepass" name="savepass" class="load-input" type="password" required placeholder="{{ gT('Şifre (zorunlu)') }}" />
+                        {% if aSurveyInfo.aLoadForm.aCaptcha.show %}
+                            <div class="load-captcha">
+                                <img src="{{ aSurveyInfo.aLoadForm.aCaptcha.sImageUrl }}" class="load-captcha-img" />
+                                <input class="load-input" type="text" placeholder="{{ gT('Güvenlik kodu') }}" />
+                            </div>
+                        {% endif %}
+                    </div>
+                    <button type="submit" class="load-btn">{{ gT('Şimdi Yükle') }}</button>
+                </form>
+            </div>
+            <div class="load-return">
+                <a href="{{ aSurveyInfo.surveyUrl }}" class="load-return-link">{{ gT('Ankete Geri Dön') }}</a>
+            </div>
+        </div>
+    </div>
+    <style>
+    .load-container {
+        min-height: calc(100vh - 100px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        background: linear-gradient(135deg, #f8fafc 0%, #e4ecf7 100%);
+        animation: fadeInUp 0.7s cubic-bezier(.39,.575,.565,1) both;
+    }
+    .load-card {
+        background: #fff;
+        border-radius: 24px;
+        box-shadow: 0 4px 24px 0 rgba(34,41,47,0.1);
+        padding: 2.5rem 2rem;
+        max-width: 480px;
+        width: 100%;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+    .load-header {
+        margin-bottom: 0.5rem;
+    }
+    .load-icon {
+        font-size: 2.2rem;
+        color: #295fa6;
+        margin-bottom: 0.5rem;
+    }
+    .load-title {
+        font-size: 1.7rem;
+        font-weight: 800;
+        color: #295fa6;
+        margin-bottom: 0.3rem;
+    }
+    .load-desc {
+        font-size: 1.08rem;
+        color: #555;
+        margin-bottom: 1.2rem;
+    }
+    .load-step {
+        margin-bottom: 1rem;
+    }
+    .load-steps {
+        text-align: left;
+        font-size: 1.05rem;
+        color: #444;
+        margin: 0 auto;
+        padding: 0 0 0 1.2em;
+        max-width: 340px;
+    }
+    .load-messages .alert {
+        font-size: 1.05rem;
+        border-radius: 12px;
+        margin-bottom: 1.2rem;
+        padding: 1em 1.2em;
+    }
+    .load-form-area form,
+    .load-form-area {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+        align-items: stretch;
+    }
+    .load-form-fields {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .load-input {
+        font-size: 1.08rem;
+        padding: 0.9em 1em;
+        border-radius: 12px;
+        border: 1px solid #e4ecf7;
+        background: #f8fafc;
+        margin-bottom: 0.5em;
+        transition: border 0.18s;
+    }
+    .load-input:focus {
+        border-color: #295fa6;
+        outline: none;
+    }
+    .load-btn {
+        padding: 0.8em 2em;
+        font-size: 1.08rem;
+        font-weight: 600;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #295fa6 0%, #4a8cff 100%);
+        color: #fff !important;
+        border: none;
+        box-shadow: 0 4px 15px rgba(41,95,166,0.2);
+        transition: transform 0.2s, box-shadow 0.2s;
+        cursor: pointer;
+        margin-top: 1em;
+    }
+    .load-btn:hover {
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 6px 20px rgba(41,95,166,0.25);
+    }
+    .load-captcha {
+        display: flex;
+        align-items: center;
+        gap: 1em;
+        justify-content: center;
+    }
+    .load-captcha-img {
+        height: 38px;
+        border-radius: 8px;
+        background: #f8fafc;
+        box-shadow: 0 1px 4px 0 rgba(41,95,166,0.08);
+    }
+    .load-return {
+        margin-top: 1.5rem;
+    }
+    .load-return-link {
+        color: #295fa6;
+        font-weight: 600;
+        text-decoration: underline;
+        font-size: 1.05rem;
+    }
+    @keyframes fadeInUp {
+        0% {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        100% {
+            opacity: 1;
+            transform: none;
+        }
+    }
+    @media (max-width: 600px) {
+        .load-container {
+            padding: 1rem;
+        }
+        .load-card {
+            padding: 1.2rem 0.5rem;
+            gap: 1.2rem;
+        }
+        .load-title {
+            font-size: 1.2rem;
+        }
+        .load-input {
+            font-size: 1em;
+            padding: 0.7em 0.7em;
+        }
+        .load-btn {
+            width: 100%;
+        }
+    }
+    </style>

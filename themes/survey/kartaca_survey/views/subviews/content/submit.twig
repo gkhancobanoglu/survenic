@@ -1,0 +1,120 @@
+{{ include('./subviews/header/start_form.twig') }}
+{{ aSurveyInfo.EM.ScriptsAndHiddenInputs }}
+
+{% set useDefault = aSurveyInfo.aCompleted.showDefault is defined and aSurveyInfo.aCompleted.showDefault %}
+{% set customEndText = aSurveyInfo.aCompleted.sEndText|default('') %}
+{% set hasCustom = (not useDefault) and (customEndText|trim != '') %}
+
+<div class="completion-container">
+  <div class="completion-card">
+
+    <div class="completion-header">
+      <div class="completion-image">
+        <img src="{{ kartacaThanksImage|default('/survenic/themes/survey/kartaca_survey/files/survenic-thanks.png', true) }}" alt="{{ kartacaThanksTitle|default(gT('Thank you!'))|replace({'"':' '}) }}">
+      </div>
+
+      <div class="completion-title">
+        {% if hasCustom %}
+          <h1>{{ kartacaThanksTitle|default(gT('Thank you!')) }}</h1>
+        {% else %}
+          <h1>{{ kartacaThanksTitle|default(gT('Thank you!')) }}</h1>
+          <p class="completion-subtitle">{{ gT("Your survey responses have been recorded.") }}</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="completion-message">
+      {% if hasCustom %}
+        {{ customEndText|raw }}
+      {% else %}
+        <p>{{ gT("Your valuable feedback is greatly appreciated. Your participation will help guide our future endeavors.") }}</p>
+      {% endif %}
+
+      {% if (aSurveyInfo.aAssessments.show) %}
+        <div class="completion-assessment">
+          {{ include('./subviews/messages/assessments.twig') }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="completion-actions">
+      {% if (aSurveyInfo.aCompleted.aPrintAnswers.show == true) %}
+        <a href="{{ aSurveyInfo.aCompleted.aPrintAnswers.sUrl|default('')|replace({'"':'%22'}) }}" class="action-button print-button">
+          <i class="fa fa-print"></i>{{ gT("Print your answers") }}
+        </a>
+      {% endif %}
+
+      {% if (aSurveyInfo.aCompleted.aPublicStatistics.show == true) %}
+        <a href="{{ aSurveyInfo.aCompleted.aPublicStatistics.sUrl|default('')|replace({'"':'%22'}) }}" class="action-button stats-button">
+          <i class="fa fa-chart-bar"></i>{{ gT("View statistics") }}
+        </a>
+      {% endif %}
+
+      {% if aSurveyInfo.aCompleted.sSurveylsUrl %}
+        <a href="{{ aSurveyInfo.aCompleted.sSurveylsUrl|default('')|replace({'"':'%22'}) }}"
+           class="action-button">
+          <i class="fa fa-external-link"></i>{{ aSurveyInfo.aCompleted.sSurveylsUrlDescription|default(gT("Continue")) }}
+        </a>
+      {% endif %}
+    </div>
+
+    <div class="social-share">
+      <div class="share-buttons">
+        <a href="#" class="share-button x"
+           onclick="window.open('https://x.com/intent/tweet?url='+encodeURIComponent(window.location.origin+window.location.pathname),'_blank'); return false;">
+          <span class="x-icon" aria-label="X">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="20" height="20">
+              <path d="M453.2 112L523.8 112L369.6 288.2L551 528L409 528L297.7 382.6L170.5 528L99.8 528L264.7 339.5L90.8 112L236.4 112L336.9 244.9L453.2 112zM428.4 485.8L467.5 485.8L215.1 152L173.1 152L428.4 485.8z" fill="white"/>
+            </svg>
+          </span>
+        </a>
+        <a href="#" class="share-button linkedin"
+           onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(window.location.origin+window.location.pathname),'_blank'); return false;">
+          <i class="fa fa-linkedin"></i>
+        </a>
+        <a href="#" class="share-button facebook"
+           onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(window.location.origin+window.location.pathname),'_blank'); return false;">
+          <i class="fa fa-facebook"></i>
+        </a>
+      </div>
+    </div>
+
+    {{ aSurveyInfo.aCompleted.sPluginHTML }}
+  </div>
+</div>
+</form>
+
+<style>
+.completion-container{min-height:calc(100vh - 100px);display:flex;align-items:center;justify-content:center;padding:2rem;animation:fadeInUp .7s cubic-bezier(.39,.575,.565,1) both}
+.completion-card{background:#fff;border-radius:24px;box-shadow:0 4px 24px rgba(34,41,47,.1);padding:2.5rem;max-width:680px;width:100%;text-align:center;position:relative;overflow:hidden}
+.completion-header{margin-bottom:2rem}
+.completion-image{margin-bottom:1.5rem}
+.completion-image img{max-width:200px;width:100%;height:auto;border-radius:20px;box-shadow:0 4px 24px rgba(41,95,166,.10)}
+.completion-title h1{font-size:2.5rem;font-weight:800;color:#295fa6;margin-bottom:.5rem;line-height:1.2}
+.completion-subtitle{font-size:1.2rem;color:#555;margin-bottom:1rem}
+.completion-message{background:#f8fafc;border-radius:16px;padding:1.5rem;margin:1.5rem 0;color:#444;font-size:1.1rem;line-height:1.6}
+.completion-actions{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin:2rem 0}
+.action-button{padding:.8em 1.5em;font-size:1rem;font-weight:600;border-radius:999px;background:linear-gradient(90deg,#295fa6 0%,#4a8cff 100%);color:#fff!important;text-decoration:none;border:none;box-shadow:0 4px 15px rgba(41,95,166,.2);transition:transform .2s,box-shadow .2s;display:inline-flex;align-items:center;gap:.5rem}
+.action-button:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 6px 20px rgba(41,95,166,.25)}
+.action-button i{font-size:1.1em}
+.social-share{margin-top:2rem;padding-top:1.5rem;border-top:1px solid #e4ecf7}
+.share-text{font-size:1rem;color:#666;margin-bottom:1rem}
+.share-buttons{display:flex;gap:1rem;justify-content:center}
+.share-button{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff!important;text-decoration:none;transition:transform .2s}
+.share-button:hover{transform:translateY(-2px)}
+.share-button.linkedin{background:#0077B5}
+.share-button.facebook{background:#4267B2}
+.share-button.x{background:#000;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;transition:background .2s}
+.share-button.x .x-icon svg{display:block}
+.share-button.x:hover{background:#222}
+@keyframes fadeInUp{0%{opacity:0;transform:translateY(30px)}100%{opacity:1;transform:none}}
+@media (max-width:768px){
+  .completion-container{padding:1rem}
+  .completion-card{padding:1.5rem 1rem}
+  .completion-title h1{font-size:2rem}
+  .completion-subtitle{font-size:1.1rem}
+  .completion-message{font-size:1rem;padding:1rem}
+  .completion-actions{flex-direction:column;gap:.8rem}
+  .action-button{width:100%;justify-content:center}
+}
+</style>

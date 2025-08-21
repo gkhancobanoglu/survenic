@@ -1,0 +1,78 @@
+<div class="printanswers-container">
+    <div class="printanswers-card">
+        <div class="printanswers-header">
+            <i class="fa fa-print printanswers-icon"></i>
+            <h1 class="printanswers-title">{{ gT('Yanıtlarınızın Yazdırılabilir Özeti') }}</h1>
+        </div>
+        <div class="printanswers-content">
+            {% if (aSurveyInfo.printPdf != 1) %}
+                {{ aSurveyInfo.EM.ScriptsAndHiddenInputs }}
+            {% endif %}
+            {{ include('./subviews/printanswers/printanswers_head.twig') }}
+            {{ include('./subviews/printanswers/printanswers_table.twig') }}
+            {{ include('./subviews/printanswers/printanswers_foot.twig') }}
+        </div>
+    </div>
+</div>
+<style>
+.printanswers-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 2rem 0.5rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #e4ecf7 100%);
+}
+.printanswers-card {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px 0 rgba(34,41,47,0.08);
+    padding: 2.2rem 2rem 2rem 2rem;
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    font-size: 1.08rem;
+    color: #222;
+}
+.printanswers-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.printanswers-icon {
+    font-size: 2.2rem;
+    color: #295fa6;
+    margin-bottom: 0.5rem;
+}
+.printanswers-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #295fa6;
+    margin-bottom: 0.3rem;
+}
+.printanswers-content {
+    margin-top: 1.2rem;
+}
+@media (max-width: 700px) {
+    .printanswers-card {
+        padding: 1.2rem 0.5rem 1rem 0.5rem;
+        font-size: 1em;
+    }
+    .printanswers-title {
+        font-size: 1.1rem;
+    }
+}
+@media print {
+    .printanswers-container, .printanswers-card {
+        background: #fff !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    .printanswers-header {
+        margin-bottom: 1rem;
+    }
+    .printanswers-title {
+        color: #222 !important;
+    }
+}
+</style>

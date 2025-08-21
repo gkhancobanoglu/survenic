@@ -1,0 +1,140 @@
+<div class="userform-container">
+    <div class="userform-card">
+        <div class="userform-header">
+            <i class="fa fa-user userform-icon"></i>
+            <h1 class="userform-title">{{ gT('Kullanıcı Girişi / Kayıt') }}</h1>
+            <p class="userform-desc">Lütfen giriş yapın veya kayıt olun.</p>
+        </div>
+        <div class="userform-form-area">
+            {% set sUserformContent =  './subviews/logincomponents/' ~ aSurveyInfo.aForm.sType ~ '.twig' %}
+            {% include sUserformContent %}
+        </div>
+        <div class="userform-lang-changer">
+            {{ include('./subviews/navigation/language_changer_form.twig') }}
+        </div>
+    </div>
+</div>
+
+<style>
+.userform-container {
+    min-height: calc(100vh - 100px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #e4ecf7 100%);
+    animation: fadeInUp 0.7s cubic-bezier(.39,.575,.565,1) both;
+}
+.userform-card {
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 4px 24px 0 rgba(34,41,47,0.1);
+    padding: 2.5rem 2rem;
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.userform-header {
+    margin-bottom: 0.5rem;
+}
+.userform-icon {
+    font-size: 2.2rem;
+    color: #295fa6;
+    margin-bottom: 0.5rem;
+}
+.userform-title {
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: #295fa6;
+    margin-bottom: 0.3rem;
+}
+.userform-desc {
+    font-size: 1.08rem;
+    color: #555;
+    margin-bottom: 1.2rem;
+}
+.userform-form-area form,
+.userform-form-area {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: stretch;
+}
+.userform-form-area input,
+.userform-form-area select,
+.userform-form-area textarea {
+    font-size: 1.08rem;
+    padding: 0.9em 1em;
+    border-radius: 12px;
+    border: 1px solid #e4ecf7;
+    background: #f8fafc;
+    margin-bottom: 0.5em;
+    transition: border 0.18s;
+}
+.userform-form-area input:focus,
+.userform-form-area select:focus,
+.userform-form-area textarea:focus {
+    border-color: #295fa6;
+    outline: none;
+}
+.userform-form-area button,
+.userform-form-area .btn {
+    padding: 0.8em 2em;
+    font-size: 1.08rem;
+    font-weight: 600;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #295fa6 0%, #4a8cff 100%);
+    color: #fff !important;
+    border: none;
+    box-shadow: 0 4px 15px rgba(41,95,166,0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    margin-top: 1em;
+}
+.userform-form-area button:hover,
+.userform-form-area .btn:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(41,95,166,0.25);
+}
+.userform-lang-changer {
+    margin-top: 1.5rem;
+}
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: none;
+    }
+}
+@media (max-width: 600px) {
+    .userform-container {
+        padding: 1rem;
+    }
+    .userform-card {
+        padding: 1.2rem 0.5rem;
+        gap: 1.2rem;
+    }
+    .userform-title {
+        font-size: 1.2rem;
+    }
+    .userform-form-area input,
+    .userform-form-area select,
+    .userform-form-area textarea {
+        font-size: 1em;
+        padding: 0.7em 0.7em;
+    }
+    .userform-form-area button,
+    .userform-form-area .btn {
+        width: 100%;
+    }
+}
+</style>

@@ -1,0 +1,108 @@
+{# Preview mode warning #}
+{% if (aSurveyInfo.active != 'Y') and (not aSurveyInfo.popupPreview) %}
+    <!-- Preview mode warning -->
+    <div class="{{ aSurveyInfo.class.activealert }} row modern-warning alert alert-warning alert-dismissible fade in show alert-dismissible" {{ aSurveyInfo.attr.activealert }} >
+        <button  {{ aSurveyInfo.attr.activealertbutton }} class="{{ aSurveyInfo.class.activealertbutton }} btn-close modern-warning-close" ></button>
+        <span class="modern-warning-icon" aria-hidden="true">&#9888;</span>
+        <span>{{ gT("This survey is currently not active. You will not be able to save your responses.") }}</span>
+    </div>
+{% endif %}
+
+{# Error Html warnings #}
+{% if aSurveyInfo.errorHtml.show %}
+    <div class='modern-warning alert alert-danger row fade in show alert-dismissible {{ aSurveyInfo.class.errorHtml }}' role='alert'>
+        <button  {{ aSurveyInfo.attr.errorHtmlbutton }} class="{{ aSurveyInfo.class.errorHtmlbutton }} btn-close modern-warning-close" ></button>
+        <ul class="modern-warning-list">
+        {% for aMessage in aSurveyInfo.errorHtml.messages  %}
+            <li><span class="modern-warning-icon" aria-hidden="true">&#9888;</span> <span>{{ aMessage }}</span></li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+{{ makeFlashMessage() }}
+
+<style>
+    .modern-warning {
+        background: linear-gradient(135deg, #fffbe6 0%, #fff7e0 100%);
+        border-radius: 14px;
+        border: none;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+        color: #7a4f01;
+        font-size: 1.08rem;
+        padding: 1.1rem 1.5rem 1.1rem 1.2rem;
+        margin: 1.2rem auto 1.2rem auto;
+        max-width: 480px;
+        display: flex;
+        align-items: flex-start;
+        position: relative;
+        gap: 0.7rem;
+        animation: modernFadeIn 0.5s;
+    }
+    .modern-warning.alert-danger {
+        background: linear-gradient(135deg, #fff0f0 0%, #ffeaea 100%);
+        color: #b3261e;
+    }
+    .modern-warning.alert-warning {
+        background: linear-gradient(135deg, #fffbe6 0%, #fff7e0 100%);
+        color: #7a4f01;
+    }
+    .modern-warning-close {
+        background: none;
+        border: none;
+        font-size: 1.2rem;
+        color: #888;
+        position: absolute;
+        top: 0.7rem;
+        right: 1rem;
+        cursor: pointer;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s, color 0.2s;
+    }
+    .modern-warning-close:hover {
+        background: #f0f0f0;
+        color: #d00;
+    }
+    .modern-warning-icon {
+        font-size: 1.3rem;
+        margin-right: 0.5rem;
+        color: #f7b500;
+        flex-shrink: 0;
+        margin-top: 0.1rem;
+    }
+    .modern-warning.alert-danger .modern-warning-icon {
+        color: #e53935;
+    }
+    .modern-warning-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+    }
+    .modern-warning-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+        font-size: 1.05rem;
+    }
+    .modern-warning-list li:last-child {
+        margin-bottom: 0;
+    }
+    @keyframes modernFadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 600px) {
+        .modern-warning {
+            max-width: 98vw;
+            font-size: 1rem;
+            padding: 1rem 0.7rem 1rem 1rem;
+        }
+    }
+</style>

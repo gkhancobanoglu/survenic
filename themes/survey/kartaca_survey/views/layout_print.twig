@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="{{ aSurveyInfo.languagecode }}" dir="{{ aSurveyInfo.dir }}" class="{{ aSurveyInfo.languagecode }} dir-{{ aSurveyInfo.dir }} {{ aSurveyInfo.class.html }}" {{ aSurveyInfo.attr.html }}>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <title>{{print.sitename}} - {{ aSurveyInfo.surveyls_title }}</title>
+    </head>
+    <body>
+
+    {# DO NOT REMOVE This is for automated testing to validate we see that page #}
+    <x-test id="action::printableSurvey"></x-test>
+
+    <div id="limesurvey">
+            <h1>{{ aSurveyInfo.surveyls_title }}</h1>
+
+            <div class="survey-description">{{ aSurveyInfo.surveyls_description }}</div>
+
+            <div class="survey-welcome">{{ aSurveyInfo.surveyls_welcometext }}</div>
+
+            <p class="x-questions">{{print.therearexquestions}}</p>
+
+            {% for group in print.groups %}
+                {% set groupTemplate = './subviews/print/print_group.twig' %}
+                {{ include(groupTemplate) }}
+            {% endfor %}
+
+            {{print.privacy}}
+            
+            <p class="submit-by">
+                {{print.end}}<br />
+                {{print.submit_by}}<br />
+                {{print.submit_text}}<br />
+                {{print.thanks}}<br />
+            </p>
+
+        </div>
+    </body>
+</html>

@@ -1,0 +1,65 @@
+<!-- Welcome Message -->
+<div id="{{ aSurveyInfo.id.welcomecontainer }}" class="{{ aSurveyInfo.class.welcomecontainer }} modern-welcome-container" {{ aSurveyInfo.attr.welcomecontainer }}>
+
+    <!-- Welcome text -->
+    <div class="{{ aSurveyInfo.class.welcome }} modern-welcome-text" {{ aSurveyInfo.attr.welcome }}>
+        {{ processString(aSurveyInfo.welcome,1) }}
+    </div>
+
+    <!-- Question count -->
+    <div class="{{ aSurveyInfo.class.questioncount }} modern-welcome-qcount" {{ aSurveyInfo.attr.questioncount }}>
+        <div class='{{ aSurveyInfo.class.questioncounttext }}' {{ aSurveyInfo.attr.questioncounttext }}>
+
+            {# If survey creator set "show x questions" in survey setting  #}
+            {% if aSurveyInfo.bShowxquestions == true %}
+                {% if aSurveyInfo.iTotalquestions < 1 %}
+                    {{ gT("There are no questions in this survey.") }}
+                {% elseif aSurveyInfo.iTotalquestions == 1  %}
+                    {{ gT("There is 1 question in this survey.") }}
+                {% else %}
+                    {{ gT("There are %s questions in this survey.") | format(aSurveyInfo.iTotalquestions) }}
+              {% endif %}
+            {% endif %}
+        </div>
+  </div>
+</div>
+
+<style>
+    .modern-welcome-container {
+        background: linear-gradient(135deg, #f8fafc 0%, #e9f5ff 100%);
+        border-radius: 18px;
+        box-shadow: 0 6px 32px rgba(0,0,0,0.10);
+        padding: 2.5rem 2rem 2rem 2rem;
+        margin: 2.5rem auto 2rem auto;
+        max-width: 540px;
+        text-align: center;
+        border: none;
+        animation: modernFadeIn 0.5s;
+    }
+    .modern-welcome-text {
+        color: #222;
+        font-size: 1.08rem;
+        font-weight: 400;
+        margin-bottom: 1.3rem;
+        line-height: 1.6;
+    }
+    .modern-welcome-qcount {
+        color: #6c757d;
+        font-size: 1rem;
+        margin-top: 0.7rem;
+        margin-bottom: 0.2rem;
+    }
+    @keyframes modernFadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 600px) {
+        .modern-welcome-container {
+            max-width: 98vw;
+            padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+        }
+        .modern-welcome-text {
+            font-size: 0.98rem;
+        }
+    }
+</style>

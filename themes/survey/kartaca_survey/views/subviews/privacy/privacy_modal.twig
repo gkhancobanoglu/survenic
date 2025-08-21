@@ -1,0 +1,226 @@
+{% if aSurveyInfo.datasecurity_error %}
+<div class="modern-datasecurity-error" id="datasecurity_error" {{ aSurveyInfo.attr.activealert }}>
+    <span class="modern-datasecurity-error-text">{{ aSurveyInfo.datasecurity_error }}</span>
+    <button type="button" aria-label="{{gT('Close')}}" class="modern-datasecurity-error-close" onclick="this.parentElement.style.display='none';">&times;</button>
+</div>
+    {% if aSurveyInfo.datasecuritynotaccepted %}
+        {% set describeprivacy = "datasecurity_error " ~ describeprivacy %}
+    {% endif %}
+{% endif %}
+
+<div class="form-check modern-privacy-check" id="privacy-wrapper">
+    <input required class="form-check-input modern-privacy-checkbox" type="checkbox" name="datasecurity_accepted" id="datasecurity_accepted" />
+    <label for="datasecurity_accepted" class="form-check-label modern-privacy-label">
+        <div class="modern-privacy-button">
+            {% set label = aSurveyInfo.datasecurity_notice_label|replace({'<a ': '<a class="modern-privacy-link" '}) %}
+            {{ label|raw }}
+        </div>
+    </label>
+</div>
+
+<div class="collapse fade" id="data-security-modal-{{aSurveyInfo.sid}}">
+    <div class="modern-privacy-modal" role="dialog" aria-modal="true" aria-labelledby="privacyModalTitle" aria-describedby="privacyModalBody" tabindex="-1">
+        <div class="modern-privacy-modal-dialog">
+            <div class="modern-privacy-modal-content">
+                <div class="modern-privacy-modal-header">
+                    <h4 id="privacyModalTitle" class="modern-privacy-modal-title">{{ gT('Privacy policy') }}</h4>
+                    <button type="button" aria-label="{{gT('Close')}}" class="modern-privacy-modal-close"
+                            onclick="$('#data-security-modal-{{aSurveyInfo.sid}}').collapse('hide');" data-bs-dismiss="modal">
+                        &times;
+                    </button>
+                </div>
+                <div id="privacyModalBody" class="modern-privacy-modal-body">
+                    {{ aSurveyInfo.datasecurity_notice }}
+                </div>
+                <div class="modern-privacy-modal-footer">
+                    <button type="button" class="modern-privacy-modal-btn-primary"
+                        onclick="$('#datasecurity_accepted').prop('checked',true).trigger('change');$('#data-security-modal-{{aSurveyInfo.sid}}').collapse('hide');">
+                        {{ gT("Accept") }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.modern-privacy-check {
+    margin: 2rem auto;
+    padding: 0;
+    max-width: 460px;
+    font-family: "Inter", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    transition: 0.3s ease;
+    border-radius: 8px;
+}
+
+.modern-privacy-checkbox {
+    display: none;
+}
+
+.modern-privacy-label {
+    width: 100%;
+    cursor: pointer;
+}
+
+.modern-privacy-button {
+    display: block;
+    width: 100%;
+    background-color: #e0f2fe;
+    border: 1px solid #90cdf4;
+    color: #1d4ed8;
+    text-align: center;
+    font-weight: 600;
+    padding: 1rem 1.25rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+#privacy-wrapper.checked .modern-privacy-button {
+    background-color: #1d4ed8;
+    color: white;
+    border-color: #1d4ed8;
+}
+
+.modern-datasecurity-error {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #dc2626;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.modern-datasecurity-error-close {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+    color: #dc2626;
+}
+.modern-privacy-modal {
+    background: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    z-index: 1050;
+}
+.modern-privacy-modal-dialog {
+    max-width: 500px;
+    width: 100%;
+}
+.modern-privacy-modal-content {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    position: relative;
+}
+.modern-privacy-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+    background: #f9fafb;
+}
+.modern-privacy-modal-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+    text-align: center;
+    width: 100%;
+}
+.modern-privacy-modal-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #9ca3af;
+    cursor: pointer;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    line-height: 1;
+    padding: 0;
+    margin: 0;
+    width: auto;
+    height: auto;
+}
+.modern-privacy-modal-close:hover {
+    color: #ef4444;
+}
+.modern-privacy-modal-body {
+    padding: 1.5rem;
+    font-size: 0.95rem;
+    color: #374151;
+    line-height: 1.6;
+}
+.modern-privacy-modal-footer {
+    display: flex;
+    justify-content: center;
+    padding: 1.25rem 1.5rem;
+    border-top: 1px solid #e5e7eb;
+    background: #f9fafb;
+}
+.modern-privacy-modal-btn-primary {
+    background: #3b82f6;
+    color: white;
+    padding: 0.625rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+.modern-privacy-modal-btn-primary:hover {
+    background: #2563eb;
+}
+
+#privacy-wrapper.checked .modern-privacy-button {
+    background-color: #1d4ed8;
+    color: white;
+    border-color: #1d4ed8;
+}
+
+#privacy-wrapper.checked .modern-privacy-link {
+    color: white !important;
+    text-decoration: underline;
+}
+
+</style>
+
+<script>
+$(function () {
+    $('#datasecurity_error').addClass("ls-js-hidden");
+
+    $("#ls-button-submit").on("click", function () {
+        if (!$('#datasecurity_accepted').prop('checked')) {
+            $('#datasecurity_error').removeClass("ls-js-hidden");
+            $('#datasecurity_error').attr("role", "alert");
+            $('#datasecurity_accepted').attr("aria-describedby", "datasecurity_error");
+        }
+    });
+
+    $("#datasecurity_accepted").on("change", function () {
+        const wrapper = document.getElementById("privacy-wrapper");
+        if (this.checked) {
+            $('#datasecurity_error').addClass("ls-js-hidden");
+            wrapper.classList.add("checked");
+        } else {
+            wrapper.classList.remove("checked");
+        }
+    });
+});
+</script>

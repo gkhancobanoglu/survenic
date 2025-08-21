@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <metadata>
+        <name>KartacaWebhook</name>
+        <type>plugin</type>
+        <class>KartacaWebhook</class>
+        <creationDate>2025-07-25</creationDate>
+        <last_update>2025-07-25</last_update>
+        <author>Gökhan Çobanoğlu</author>
+        <authorUrl>https://kartaca.com</authorUrl>
+        <version>1.0.0</version>
+        <license>Licensed by Kartaca</license>
+        <description><![CDATA[
+            A plugin that sends and logs events occurring during Survenic surveys to external systems via webhook.
+        ]]></description>
+    </metadata>
+
+    <compatibility>
+        <version>3.0</version>
+        <version>4.0</version>
+        <version>5.0</version>
+        <version>5.1</version>
+        <version>5.2</version>
+        <version>6.0</version>
+        <version>6.1</version>
+        <version>6.2</version>
+    </compatibility>
+
+    <settings>
+        <setting>
+            <name>webhookUrl</name>
+            <type>string</type>
+            <default></default>
+            <localizable>0</localizable>
+        </setting>
+    </settings>
+
+    <updaters disabled="disabled">
+    </updaters>
+</config>

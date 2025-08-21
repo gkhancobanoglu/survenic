@@ -1,0 +1,120 @@
+{#
+
+(¯`·._.·(¯`·._.·  Language Changer for Top Menu ·._.·´¯)·._.·´¯)
+
+Show a language changer inside the top menu
+
+It's a typical bootstrap dropdown button.
+@see: http://getbootstrap.com/components/#dropdowns
+
+@var array  aSurveyInfo.alanguageChangerDatas.aListLang :  contains the list of available languages for this survey, 'language_code' => 'language name'
+@var string aSurveyInfo.alanguageChangerDatas.sSelected :  the language code of the selected language
+
+The language change is done via javascript
+#}
+
+{# There is many condition where the language changer should not be shown. Eg: there is only one language available #}
+{% if  aSurveyInfo.alanguageChanger.show == true %}
+
+    {# we set a shortcut for aSurveyInfo.alanguageChangerDatas #}
+    {% set aLCD  = aSurveyInfo.alanguageChanger.datas %}
+
+    <!-- Language Changer, top menu version -->
+    <li class="ls-no-js-hidden form-change-lang dropdown nav-item px-2 modern-lang-topmenu">
+        <a class="nav-link dropdown-toggle modern-lang-topmenu-toggle" role="button" data-bs-toggle="dropdown" href="#"
+           data-bs-target="#language-dropdown">
+            <span class="modern-lang-topmenu-label">{{ gT("Language:") }}</span>
+            <span class="modern-lang-topmenu-selected">{{ aLCD.aListLang[aLCD.sSelected] }}</span>
+            <span class="modern-lang-topmenu-caret"></span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end modern-lang-topmenu-dropdown" id="language-dropdown">
+            {% for value, lang in aLCD.aListLang %}
+                <li class="index-item">
+                    <a href='#' data-limesurvey-lang='{{ value }}' class="dropdown-item ls-language-link modern-lang-topmenu-item{% if value == aLCD.sSelected %} selected{% endif %}">
+                        {{ lang }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </li>
+
+{% endif %}
+
+{{ registerScript("BasicThemeScripts-TopLanguageChanger", "basicThemeScripts.initTopMenuLanguageChanger('.ls-language-link ', 'form#limesurvey'); ", "POS_POSTSCRIPT") }}
+
+<style>
+    .modern-lang-topmenu {
+        position: relative;
+    }
+    .modern-lang-topmenu-toggle {
+        font-size: 0.98rem;
+        font-weight: 500;
+        color: #2563eb !important;
+        background: #fff;
+        border-radius: 7px;
+        padding: 0.38rem 1.1rem 0.38rem 0.9rem;
+        border: 1.5px solid #dbeafe;
+        transition: border 0.16s, box-shadow 0.16s, background 0.16s;
+        outline: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .modern-lang-topmenu-toggle:focus, .modern-lang-topmenu-toggle:active {
+        border: 1.5px solid #0d6efd;
+        box-shadow: 0 0 0 2px #0d6efd22;
+        background: #f8fafc;
+    }
+    .modern-lang-topmenu-label {
+        color: #1e3a8a;
+        font-weight: 600;
+        margin-right: 0.2rem;
+    }
+    .modern-lang-topmenu-selected {
+        color: #2563eb;
+        font-weight: 600;
+    }
+    .modern-lang-topmenu-caret {
+        border: solid #2563eb;
+        border-width: 0 2px 2px 0;
+        display: inline-block;
+        padding: 3px;
+        margin-left: 0.3rem;
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        margin-top: 2px;
+    }
+    .modern-lang-topmenu-dropdown {
+        min-width: 160px;
+        border-radius: 8px;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+        border: 1.5px solid #dbeafe;
+        margin-top: 0.3rem;
+        padding: 0.3rem 0;
+    }
+    .modern-lang-topmenu-item {
+        font-size: 0.97rem;
+        color: #2563eb;
+        padding: 0.38rem 1.1rem;
+        border-radius: 5px;
+        transition: background 0.14s, color 0.14s;
+    }
+    .modern-lang-topmenu-item.selected,
+    .modern-lang-topmenu-item:focus,
+    .modern-lang-topmenu-item:hover {
+        background: #e9f5ff;
+        color: #0d6efd;
+        font-weight: 600;
+    }
+    @media (max-width: 600px) {
+        .modern-lang-topmenu-toggle {
+            width: 100%;
+            padding: 0.32rem 0.7rem;
+            font-size: 0.95rem;
+        }
+        .modern-lang-topmenu-dropdown {
+            min-width: 120px;
+        }
+    }
+</style>
+

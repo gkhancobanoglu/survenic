@@ -1,0 +1,36 @@
+{% if aGroup.showgroupinfo == 'D' or aGroup.showgroupinfo == 'B' %}
+    {% if aGroup.description != '' %}
+        <div class="modern-group-desc-wrapper">
+            <p class="modern-group-desc">{{ processString(aGroup.description) }}</p>
+        </div>
+
+        <style>
+            .modern-group-desc-wrapper {
+                background: #f1f5f9;
+                padding: 1rem 1.3rem;
+                border-radius: 0.75rem;
+                margin-bottom: 1.4rem;
+                max-width: 100%;
+                box-shadow: 0 2px 8px rgba(37, 99, 235, 0.04);
+            }
+
+            .modern-group-desc {
+                font-size: 1.05rem;
+                line-height: 1.6;
+                margin: 0;
+                color: #334155;
+                font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            }
+
+            @media (max-width: 700px) {
+                .modern-group-desc {
+                    font-size: 0.95rem;
+                }
+
+                .modern-group-desc-wrapper {
+                    padding: 0.8rem 1rem;
+                }
+            }
+        </style>
+    {% endif %}
+{% endif %}

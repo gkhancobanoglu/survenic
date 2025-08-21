@@ -1,0 +1,45 @@
+{#
+    (¯`·._.·(¯`·._.· Survey Question Help  ·._.·´¯)·._.·´¯)
+
+    The additional question help as entered by the survey creator in question editing
+    NOTE: see views/subviews/survey/question.twig comments for more infos
+#}
+
+<!-- Survey question help -->
+<div class="{{ aSurveyInfo.class.helpcontainer }} col-12 modern-question-help-container" {{ aSurveyInfo.attr.helpcontainer }}>
+    {% if aQuestion.help.show %}
+        <div class="{{ aSurveyInfo.class.lsquestionhelp }} modern-question-help-block">
+            {{ aQuestion.help.text | raw }}
+        </div>
+    {% else %}
+        <div class="modern-question-help-block">
+            {{ aQuestion.help.text | raw }}
+        </div>
+    {% endif %}
+</div>
+<style>
+    .modern-question-help-container {
+        margin: 0.7rem 0 1.1rem 0;
+        padding: 0;
+    }
+    .modern-question-help-block {
+        background: #f1f5f9;
+        color: #334155;
+        border-radius: 10px;
+        font-size: 1.01rem;
+        line-height: 1.6;
+        padding: 0.9em 1.2em;
+        margin: 0 auto;
+        max-width: 700px;
+        box-shadow: 0 1px 4px rgba(37,99,235,0.04);
+        word-break: break-word;
+        font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    }
+    @media (max-width: 700px) {
+        .modern-question-help-block {
+            font-size: 0.95rem;
+            padding: 0.7em 0.5em;
+            max-width: 98vw;
+        }
+    }
+</style>

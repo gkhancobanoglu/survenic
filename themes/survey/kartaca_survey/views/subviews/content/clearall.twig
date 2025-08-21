@@ -1,0 +1,154 @@
+<div class="clearall-container">
+    <div class="clearall-card">
+        <div class="clearall-header">
+            <i class="fa fa-exclamation-circle clearall-icon"></i>
+            <h1 class="clearall-title">{{ gT('Tüm Yanıtları Temizle') }}</h1>
+        </div>
+        <div class="clearall-warning">
+            <div class="clearall-alert">
+                <strong>{{ gT('Dikkat!') }}</strong> {{ gT('Tüm yanıtlarınız silinecek. Bu işlemi geri alamazsınız.') }}
+            </div>
+            <div class="clearall-question">
+                <p>{{ gT('Emin misiniz?') }}</p>
+            </div>
+        </div>
+        <div class="clearall-actions">
+            <form method="post" action="" class="clearall-form">
+                <button type="submit" name="confirm-clearall" value="yes" class="clearall-btn clearall-btn-danger">
+                    <i class="fa fa-trash"></i> {{ gT('Evet, Hepsini Sil') }}
+                </button>
+                <a href="{{ aSurveyInfo.surveyUrl }}" class="clearall-btn clearall-btn-cancel">
+                    <i class="fa fa-times"></i> {{ gT('İptal') }}
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+<style>
+.clearall-container {
+    min-height: calc(100vh - 100px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #e4ecf7 100%);
+    animation: fadeInUp 0.7s cubic-bezier(.39,.575,.565,1) both;
+}
+.clearall-card {
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 4px 24px 0 rgba(34,41,47,0.1);
+    padding: 2.5rem 2rem;
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.clearall-header {
+    margin-bottom: 0.5rem;
+}
+.clearall-icon {
+    font-size: 2.5rem;
+    color: #dc2626;
+    margin-bottom: 0.5rem;
+}
+.clearall-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #dc2626;
+    margin-bottom: 0.3rem;
+}
+.clearall-warning {
+    margin-bottom: 1.5rem;
+}
+.clearall-alert {
+    background: #fff1f2;
+    color: #b91c1c;
+    border: 2px solid #dc2626;
+    border-radius: 16px;
+    padding: 1.2rem 1rem;
+    font-size: 1.12rem;
+    font-weight: 600;
+    box-shadow: 0 2px 12px 0 rgba(220,38,38,0.08);
+    margin-bottom: 1.2rem;
+}
+.clearall-question {
+    font-size: 1.08rem;
+    color: #b91c1c;
+    font-weight: 600;
+}
+.clearall-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+.clearall-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    justify-content: center;
+}
+.clearall-btn {
+    padding: 0.8em 2em;
+    font-size: 1.08rem;
+    font-weight: 600;
+    border-radius: 999px;
+    border: none;
+    box-shadow: 0 4px 15px rgba(220,38,38,0.13);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+.clearall-btn-danger {
+    background: linear-gradient(90deg, #dc2626 0%, #f87171 100%);
+    color: #fff !important;
+}
+.clearall-btn-danger:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(220,38,38,0.18);
+}
+.clearall-btn-cancel {
+    background: linear-gradient(90deg, #f3f4f6 0%, #e5e7eb 100%);
+    color: #222 !important;
+    border: 1px solid #e5e7eb;
+}
+.clearall-btn-cancel:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(100,116,139,0.10);
+}
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: none;
+    }
+}
+@media (max-width: 600px) {
+    .clearall-container {
+        padding: 1rem;
+    }
+    .clearall-card {
+        padding: 1.2rem 0.5rem;
+        gap: 1.2rem;
+    }
+    .clearall-title {
+        font-size: 1.1rem;
+    }
+    .clearall-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+</style>

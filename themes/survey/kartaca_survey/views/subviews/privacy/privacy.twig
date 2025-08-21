@@ -1,0 +1,91 @@
+<!-- Privacy message -->
+<div class="{{ aSurveyInfo.class.privacycontainer }} modern-privacy-container" {{ aSurveyInfo.attr.privacycontainer }}>
+    <div class="{{ aSurveyInfo.class.privacycol }} modern-privacy-box" {{ aSurveyInfo.attr.privacycol }}>
+        {% if (aSurveyInfo.options.hideprivacyinfo == "off" ) %}
+            {% block anonymous %}
+                {% if (aSurveyInfo.anonymized == "Y") %}
+                    <div class="{{ aSurveyInfo.class.privacyhead }} modern-privacy-header" {{ aSurveyInfo.attr.privacyhead }}>
+                        {{ gT("This survey is anonymous.") }}
+                    </div>
+                    <div class="modern-privacy-body">
+                        <p class="{{ aSurveyInfo.class.privacybody }}">
+                            {{ gT("The record of your survey responses does not contain any identifying information about you, unless a specific survey question explicitly asked for it.") }}
+                        </p>
+                        <p class="{{ aSurveyInfo.class.privacybody }}">
+                            {{ gT("If you used an identifying access code to access this survey, please rest assured that this code will not be stored together with your responses. It is managed in a separate database and will only be updated to indicate whether you did (or did not) complete this survey. There is no way of matching identification access codes with survey responses.") }}
+                        </p>
+                    </div>
+                {% endif %}
+            {% endblock %}
+        {% endif %}
+
+        {% block datasecurity %}
+            {% if aSurveyInfo.format != 'A' %}
+                {% if (aSurveyInfo.showsurveypolicynotice == 1) %}
+                    {{ include('./subviews/privacy/privacy_text.twig') }}
+                {% elseif (aSurveyInfo.showsurveypolicynotice == 2) %}
+                    {{ include('./subviews/privacy/privacy_modal.twig') }}
+                {% endif %}
+            {% endif %}
+        {% endblock %}
+    </div>
+</div>
+
+<style>
+.modern-privacy-container {
+    justify-content: center;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.modern-privacy-header {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #2563eb;
+    margin-bottom: 1.1rem;
+    letter-spacing: -0.4px;
+    text-align: center;
+}
+
+.modern-privacy-body {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.modern-privacy-body p {
+    font-size: 1.06rem;
+    line-height: 1.7;
+    color: #374151;
+    margin-bottom: 1rem;
+}
+
+.modern-privacy-datasecurity-label--collapse,
+.modern-privacy-datasecurity-label--modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    max-width: 720px;
+    margin: 2rem auto 0 auto;
+    gap: 1.2rem;
+    padding: 0 1rem;
+}
+
+@media (max-width: 768px) {
+    .modern-privacy-header {
+        font-size: 1.1rem;
+    }
+
+    .modern-privacy-body p {
+        font-size: 1rem;
+    }
+
+    .modern-privacy-datasecurity-label--collapse,
+    .modern-privacy-datasecurity-label--modal {
+        max-width: 98vw;
+        padding: 0 0.5rem;
+        gap: 0.8rem;
+    }
+}
+</style>

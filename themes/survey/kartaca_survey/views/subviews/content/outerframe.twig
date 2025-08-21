@@ -1,0 +1,34 @@
+<div class="outerframe-modern-container">
+    <div class="outerframe-modern-card">
+        {% include './subviews/content/mainrow.twig' with {'include_content': include_content } %}
+    </div>
+</div>
+<style>
+.outerframe-modern-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    background: linear-gradient(135deg, #f8fafc 0%, #e4ecf7 100%);
+    padding: 2.5rem 0.5rem 2rem 0.5rem;
+}
+.outerframe-modern-card {
+    background: #fff;
+    border-radius: 22px;
+    box-shadow: 0 4px 24px 0 rgba(34,41,47,0.08);
+    max-width: 980px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2.2rem 2rem 2rem 2rem;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+@media (max-width: 900px) {
+    .outerframe-modern-card {
+        max-width: 100vw;
+        padding: 1.2rem 0.5rem 1rem 0.5rem;
+    }
+}
+</style>

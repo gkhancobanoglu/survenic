@@ -1,0 +1,177 @@
+{% set data_live_search = (question_template_attribute.show_search == 'default' or question_template_attribute.show_search is empty or question_template_attribute.show_search == 'false') ? '' : "data-live-search='true'" %}
+{% set show_tick = (question_template_attribute.show_tick == 'default' or question_template_attribute.show_tick is empty or question_template_attribute.show_tick == 'false') ? '' : "show-tick" %}
+{% set width_entry = (question_template_attribute.width_entry == 'default' or question_template_attribute.width_entry is empty or question_template_attribute.width_entry == 'false') ? "data-width='auto'" : '' %}
+
+<div class="mb-3 row align-items-center modern-answer-wrapper">
+  <div class="{{ coreClass }} col-12">
+    <select
+      class="form-control list-question-select {{ show_tick }}"
+      {{ data_live_search }}
+      {{ width_entry }}
+      data-none-selected-text=''
+      name="{{ name }}"
+      id="answer{{ name }}"
+      data-style="btn-modern-answer"
+      aria-labelledby="ls-question-text-{{ basename }}"
+    >
+      {{ sOptions }}
+    </select>
+
+    {{ C.Html.hiddenField("java"~name, value, {'id':"java"~name, 'disabled':"disabled"}) }}
+  </div>
+
+  {{ sOther }}
+</div>
+
+<script type="text/javascript">
+  $(function () {
+    var $select = $('#answer{{ name }}').selectpicker();
+
+    {% if width_entry != '' %}
+    $select.on('loaded.bs.select.firstload', function () {
+      $select.off('loaded.bs.select.firstload');
+      setTimeout(function(){ $select.trigger('loaded.bs.select'); }, 200);
+    });
+    {% endif %}
+
+    function applySelectedState() {
+      var $btn = $select.siblings('button.dropdown-toggle.btn-modern-answer');
+      var val = $select.val();
+      var hasValue = Array.isArray(val) ? val.length > 0 : (val !== null && val !== '');
+      $btn.toggleClass('is-selected', hasValue);
+    }
+
+    applySelectedState();
+    $select.on('changed.bs.select', applySelectedState);
+  });
+</script>
+
+<style>
+:root {
+  --answer-active-gradient: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  --answer-active-shadow: 0 8px 25px rgba(59,130,246,.4);
+  --answer-active-border: #3b82f6;
+  --answer-active-text: #fff;
+}
+
+.bootstrap-select,
+.bootstrap-select > .dropdown-toggle { width: 100% !important; }
+
+.modern-answer-wrapper .bootstrap-select {
+  margin: 0 16px 0 24px;
+  width: calc(100% - 40px) !important;
+}
+@media (min-width: 992px) {
+  .modern-answer-wrapper .bootstrap-select {
+    margin: 0 20px 0 28px;
+    width: calc(100% - 48px) !important;
+  }
+}
+
+.btn-modern-answer {
+  display: block;
+  width: 100%;
+  padding: 1.2rem 1.6rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #fff 0%, #f8fafc 100%);
+  color: #334155;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 1.05rem;
+  line-height: 1.35;
+  box-shadow: 0 2px 8px rgba(0,0,0,.04);
+  text-align: left;
+  transition: background .3s ease, border-color .3s ease, box-shadow .3s ease, color .3s ease; 
+  cursor: pointer;
+}
+
+.btn-modern-answer:hover,
+.bootstrap-select.show > .btn-modern-answer,
+.bootstrap-select.open > .btn-modern-answer,
+.btn-modern-answer.is-selected {
+  background: var(--answer-active-gradient) !important;
+  border-color: var(--answer-active-border) !important;
+  color: var(--answer-active-text) !important;
+  font-weight: 600;
+  box-shadow: var(--answer-active-shadow) !important;
+}
+
+.btn-modern-answer:focus,
+.btn-modern-answer:focus-visible,
+.btn-modern-answer:active,
+.bootstrap-select > .dropdown-toggle.btn-modern-answer:focus,
+.bootstrap-select > .dropdown-toggle.btn-modern-answer:focus-visible {
+  border-color: var(--answer-active-border) !important;
+  box-shadow: var(--answer-active-shadow) !important;
+  outline: none !important;
+}
+
+.bootstrap-select > .dropdown-toggle::after,
+.btn-modern-answer .caret,
+.btn-modern-answer::after,
+.btn-modern-answer .filter-option::before,
+.bootstrap-select .bs-caret,
+.bootstrap-select .bs-caret .caret {
+  display: none !important;
+}
+
+.btn-modern-answer .filter-option {
+  position: relative;
+  padding-right: 32px;
+}
+.btn-modern-answer .filter-option::after {
+  content: "";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  width: 8px; height: 8px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: translateY(-50%) rotate(45deg);
+  opacity: .9;
+}
+
+.btn-modern-answer .filter-option,
+.btn-modern-answer .filter-option-inner,
+.btn-modern-answer .filter-option-inner-inner {
+  text-align: center;
+  width: 100%;
+}
+
+.btn-modern-answer .filter-option-inner-inner {
+  position: relative;
+  left: 6px; 
+}
+
+.bootstrap-select .dropdown-menu {
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 12px 30px rgba(15,23,42,.12);
+  overflow: hidden;
+}
+.bootstrap-select .dropdown-item { padding: 10px 14px; font-weight: 500; }
+.bootstrap-select .dropdown-item:hover {
+  background: rgba(59,130,246,.08) !important;
+  color: #2563eb !important;
+}
+.bootstrap-select .dropdown-item.active,
+.bootstrap-select .dropdown-item:active,
+.bootstrap-select .dropdown-menu li.selected a {
+  background: var(--answer-active-gradient) !important;
+  color: var(--answer-active-text) !important;
+}
+
+.bootstrap-select > .btn-modern-answer.disabled,
+.bootstrap-select > .btn-modern-answer:disabled {
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%) !important;
+  color: #94a3b8 !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: none !important;
+  cursor: not-allowed;
+}
+
+.select-with-other { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.select-with-other .text-item.other-text-item { margin-top: 0 !important; flex: 1; min-width: 180px; }
+</style>
+

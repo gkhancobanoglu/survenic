@@ -1,0 +1,36 @@
+<!-- Question {{ aQuestion.qid }} -->
+<div 
+    {{ aQuestion.attributes }} 
+    class="question-card {{ aQuestion.class }} {{ aQuestion.input_error_class }}"
+    {{ aSurveyInfo.attr.questioncontainer }}
+>
+    {{ include('./subviews/survey/question.twig') }}
+</div>
+
+<style>
+    .question-card {
+        background: #ffffff;
+        border-radius: 1rem;
+        padding: 1.6rem 2rem;
+        margin: 2rem auto;
+        box-shadow: 0 2px 14px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        max-width: 760px;
+        width: 95%;
+        border: 1px solid #e6ecf0;
+    }
+
+    .question-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    @media (max-width: 768px) {
+        .question-card {
+            padding: 1.2rem 1rem;
+            margin: 1.2rem auto;
+            border-radius: 0.8rem;
+        }
+    }
+</style>
+<!-- End of question {{ aQuestion.qid }} -->

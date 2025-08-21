@@ -1,0 +1,21 @@
+.table-bordered > thead > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > th,
+.table-bordered > tbody > tr > td {
+  border: 1px solid #e0e6ed;
+}
+
+#survey-nav {
+  background-color: #1e40af !important;
+  background: #1e40af !important;
+}
+
+#survey-nav.navbar-dark {
+  background-color: #1e40af !important;
+  background: #1e40af !important;
+}
+
+#survey-nav.navbar-default {
+  background-color: #1e40af !important;
+  background: #1e40af !important;
+}

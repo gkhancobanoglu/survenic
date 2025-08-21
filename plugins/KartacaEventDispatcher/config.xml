@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <metadata>
+        <name>KartacaEventDispatcher</name>
+        <type>plugin</type>
+        <class>KartacaEventDispatcher</class>
+        <creationDate>2025-08-13</creationDate>
+        <last_update>2025-08-13</last_update>
+        <author>Gökhan Çobanoğlu</author>
+        <authorUrl>https://kartaca.com</authorUrl>
+        <version>1.0.0</version>
+        <license>Licensed by Kartaca</license>
+        <description><![CDATA[
+            Dispatches Survenic runtime events (survey_started, page_submit, survey_completed, session_abandoned)
+            to one or both channels: an HTTP Webhook and Google Cloud Pub/Sub. Includes self-scan abandonment detection
+            and structured NDJSON logging.
+        ]]></description>
+    </metadata>
+
+    <compatibility>
+        <version>3.0</version>
+        <version>4.0</version>
+        <version>5.0</version>
+        <version>5.1</version>
+        <version>5.2</version>
+        <version>6.0</version>
+        <version>6.1</version>
+        <version>6.2</version>
+    </compatibility>
+
+    <settings>
+        <!-- Webhook -->
+        <setting>
+            <name>enableWebhook</name>
+            <type>boolean</type>
+            <default>1</default>
+            <localizable>0</localizable>
+        </setting>
+        <setting>
+            <name>webhookUrl</name>
+            <type>string</type>
+            <default></default>
+            <localizable>0</localizable>
+        </setting>
+        <setting>
+            <name>authHeaderKey</name>
+            <type>string</type>
+            <default></default>
+            <localizable>0</localizable>
+        </setting>
+        <setting>
+            <name>authHeaderValue</name>
+            <type>string</type>
+            <default></default>
+            <localizable>0</localizable>
+        </setting>
+
+        <!-- Google Pub/Sub -->
+        <setting>
+            <name>enablePubSub</name>
+            <type>boolean</type>
+            <default>0</default>
+            <localizable>0</localizable>
+        </setting>
+        <setting>
+            <name>gcpProjectId</name>
+            <type>string</type>
+            <default></default>
+            <localizable>0</localizable>
+        </setting>
+        <setting>
+            <name>pubsubTopic</name>
+            <type>string</type>
+            <default>survey-events</default>
+            <localizable>0</localizable>
+        </setting>
+        <setting>
+            <name>gcpCredentialsPath</name>
+            <type>string</type>
+            <default></default>
+            <localizable>0</localizable>
+        </setting>
+
+        <!-- Abandonment / self-scan -->
+        <setting>
+            <name>abandonThresholdMinutes</name>
+            <type>int</type>
+            <default>3</default>
+            <localizable>0</localizable>
+        </setting>
+        <setting>
+            <name>selfScanEverySeconds</name>
+            <type>int</type>
+            <default>60</default>
+            <localizable>0</localizable>
+        </setting>
+
+        <!-- Logging -->
+        <setting>
+            <name>enableEventLogging</name>
+            <type>boolean</type>
+            <default>1</default>
+            <localizable>0</localizable>
+        </setting>
+        <setting>
+            <name>enableJsonLogging</name>
+            <type>boolean</type>
+            <default>1</default>
+            <localizable>0</localizable>
+        </setting>
+    </settings>
+
+    <updaters disabled="disabled">
+    </updaters>
+</config>

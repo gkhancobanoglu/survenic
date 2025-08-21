@@ -1,0 +1,149 @@
+<div class="{{ aSurveyInfo.class.maincoldivdiva }} h3 captcha-form-heading" {{ aSurveyInfo.attr.maincoldivdiva }}>
+    {% block formheading %}
+        {{ gT("Before you start, please prove you are human.") }}
+    {% endblock %}
+</div>
+<div class="{{ aSurveyInfo.class.maincoldivdivb }} card card-body bg-light container-fluid mb-3 captcha-form-card" {{ aSurveyInfo.attr.maincoldivdivb }}>
+
+    {% block description %}
+        
+    {% endblock %}
+
+    {% if  not empty(aSurveyInfo.aForm.aEnterErrors) %}
+        <ul class='{{ aSurveyInfo.class.maincoldivdivbul }} alert alert-danger list-unstyled captcha-error-list' {{ aSurveyInfo.attr.maincoldivdivbul }}>
+            {% for  key, error in aSurveyInfo.aForm.aEnterErrors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <div class="form-{{ aSurveyInfo.aForm.sType }} {{ aSurveyInfo.class.maincoldivdivbdiv }}" {{ aSurveyInfo.attr.maincoldivdivbdiv }} >
+        {#
+            array of attributes of the form tag.
+            To add a new attribute, just add an entry:
+            'attribute' : 'value',
+        #}
+        {%
+            set htmlOptions = {
+                'id'          : 'form-' ~ aSurveyInfo.aForm.sType ,
+                'name'        : 'limesurvey',
+                'class'       : 'ls-form form form-horizontal',
+            }
+        %}
+
+        {#  TOKEN FORM #}
+        <!-- Start of the main Form-->
+        {{
+            C.Html.form(
+                ( aSurveyInfo.surveyUrl ),
+                    'post',
+                    (htmlOptions)
+                )
+        }}
+
+        {% block formcontent  %}
+
+            <div class='{{ aSurveyInfo.class.maincolformdivb }}  mb-3 captcha-form-card' {{ aSurveyInfo.attr.maincolformdivb }}>
+
+                <!-- Doesn't seems aria capable -->
+                <label class='{{ aSurveyInfo.class.maincolformdivblabel }} control-label col-md-4 captcha-label' {{ aSurveyInfo.attr.maincolformdivblabel }} >
+                    {{ gT("Please solve the following equation:") }}
+                    <small class="{{ aSurveyInfo.class.maincolformdivblabelsmall }} text-danger asterisk fa fa-asterisk float-start small"  {{ aSurveyInfo.attr.maincolformdivblabelsmall }} ></small>
+                    <span  class="{{ aSurveyInfo.class.maincolformdivblabelspan }} visually-hidden text-danger asterisk" {{ aSurveyInfo.attr.maincolformdivblabelspan }}>
+                        ( {{ gT("Mandatory") }} )
+                    <span>
+                </label>
+                <div class="col-md-2">
+                    <div class='{{ aSurveyInfo.class.maincolformdivbdivdivdiv }} captcha-captcha-box' {{ aSurveyInfo.attr.maincolformdivbdivdivdiv }} >
+                        {# see: LS_Twig_Extension::renderCaptcha() in application/core/LS_Twig_Extension.php #}
+                        {{ renderCaptcha().renderOut() }}
+                        <a href="#" class="btn btn-sm btn-outline-secondary captcha-captcha-refresh" id="reloadCaptcha" title="{{ gT("Reload captcha") }}" data-bs-toggle="captcha"><i class="fa fa-refresh"></i></a>
+                    </div>
+                </div>
+                <div class='{{ aSurveyInfo.class.maincolformdivbdiv }} col-md-6' {{ aSurveyInfo.attr.maincolformdivbdiv }}>
+                    <input class='form-control {{ aSurveyInfo.class.maincolformdivbdivdivinput }} captcha-input' {{ aSurveyInfo.attr.maincolformdivbdivdivinput }} >
+                </div>
+            </div>
+
+            <div class='{{ aSurveyInfo.class.maincolformdivc }} mb-3 ' {{ aSurveyInfo.attr.maincolformdivc }}>
+                <div class='{{ aSurveyInfo.class.maincolformdivcdiv }} col-md-7 offset-lg-3 ' {{ aSurveyInfo.attr.maincolformdivcdiv }}>
+                    <button class='{{ aSurveyInfo.class.maincolformdivcdivbutton }} btn btn-primary captcha-submit-btn' {{ aSurveyInfo.attr.maincolformdivcdivbutton }}>
+                        {{ gT("Continue") }}
+                    </button>
+                </div>
+            </div>
+        {% endblock %}
+        </form>
+    </div>
+    <style>
+    .captcha-form-heading {
+        font-size: 1.18em;
+        font-weight: 600;
+        color: #295fa6;
+        margin-bottom: 1.1em;
+        text-align: center;
+    }
+    .captcha-form-card {
+        background: #f8fafc;
+        border-radius: 1.1em;
+        box-shadow: 0 2px 12px 0 rgba(34,41,47,0.06);
+        padding: 1.3em 1.1em 1.1em 1.1em;
+        margin-bottom: 1.1em;
+    }
+    .captcha-label {
+        font-weight: 500;
+        color: #1e4c8a;
+        margin-bottom: 0.5em;
+    }
+    .captcha-captcha-box {
+        background: #f4f7fb;
+        border-radius: 0.7em;
+        padding: 0.5em 0.7em;
+        box-shadow: 0 1px 4px 0 rgba(34,41,47,0.07);
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+    }
+    .captcha-captcha-refresh {
+        border-radius: 0.5em;
+        color: #295fa6;
+        border: 1px solid #c7d3e0;
+        background: #f4f7fb;
+        transition: background 0.2s, color 0.2s;
+    }
+    .captcha-captcha-refresh:hover, .captcha-captcha-refresh:focus {
+        background: #e4ecf7;
+        color: #1e4c8a;
+    }
+    .captcha-input {
+        border-radius: 0.6em;
+        border: 1px solid #c7d3e0;
+        font-size: 1.08em;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .captcha-input:focus {
+        border-color: #295fa6;
+        box-shadow: 0 0 0 2px #e4ecf7;
+    }
+    .captcha-submit-btn {
+        border-radius: 0.7em;
+        font-weight: 600;
+        padding: 0.6em 2.2em;
+        font-size: 1.08em;
+        background: linear-gradient(90deg, #295fa6 0%, #4e8edb 100%);
+        border: none;
+        color: #fff;
+        box-shadow: 0 2px 8px 0 rgba(34,41,47,0.07);
+        transition: background 0.2s, box-shadow 0.2s;
+    }
+    .captcha-submit-btn:hover, .captcha-submit-btn:focus {
+        background: linear-gradient(90deg, #1e4c8a 0%, #295fa6 100%);
+        box-shadow: 0 4px 16px 0 rgba(34,41,47,0.10);
+        color: #fff;
+    }
+    .captcha-error-list {
+        border-radius: 0.7em;
+        font-size: 1em;
+        box-shadow: 0 1px 4px 0 rgba(255,0,0,0.04);
+    }
+    </style>

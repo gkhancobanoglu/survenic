@@ -1,0 +1,48 @@
+{#
+
+    (¯`·._.·(¯`·._.·  Bootstrap Modal Alert ·._.·´¯)·._.·´¯)
+
+    This is the modal that shows most of the alert messages.
+    The conversion from pure JavaScript alert to Bootstrap modal is done in theme-core.js
+#}
+
+
+
+{# Register script for modal #}
+{% if( empty(json_decode(aSurveyInfo.jPopup)) == false ) %}
+    {{ registerScript('startPopup',"LSvar.startPopups = " ~ aSurveyInfo.jPopup , "POS_HEAD") }}
+    {{ registerScript('showStartPopups',"window.templateCore.alertSurveyDialog(" ~ aSurveyInfo.jPopup ~ ");", "POS_END") }}
+    {{ registerScript('activateSoftMandatory',"activateSoftMandatory();", "POS_END") }}
+{% endif %}
+<!-- Bootstrap Modal Alert -->
+{% if(aSurveyInfo.id.alertmodal)%}
+<div id="{{ aSurveyInfo.id.alertmodal }}" class="{{ aSurveyInfo.class.alertmodal }}" {{ aSurveyInfo.attr.alertmodal }}>
+    <div class="{{ aSurveyInfo.class.modaldialog }}" {{ aSurveyInfo.attr.modaldialog }}>
+        <div class="{{ aSurveyInfo.class.modalcontent }}" {{ aSurveyInfo.attr.modalcontent }} >
+            <div class="{{ aSurveyInfo.class.modalheader }}" {{ aSurveyInfo.attr.modalheader }} >
+                <button  {{ aSurveyInfo.attr.modalclosebutton }} class="{{ aSurveyInfo.class.modalclosebutton }}"  ></button>
+                <div class="{{ aSurveyInfo.class.modaltitle }}" {{ aSurveyInfo.attr.modaltitle }}>&nbsp;</div>
+            </div>
+            <div class="{{ aSurveyInfo.class.modalbody }}" {{ aSurveyInfo.attr.modalbody }}>
+            </div>
+            {% if(aSurveyInfo.mandNonSoft == false and aSurveyInfo.mandSoft)%}
+            <div class="{{ aSurveyInfo.class.modalfooter }}" {{ aSurveyInfo.attr.modalfooter }}>
+                <a id="{{ aSurveyInfo.id.mandatorySoftModal }}" class="{{ aSurveyInfo.class.modalfooterlink }}">{{ gT("Continue without answering") }}</a>
+                <script>
+                    {% if (intval(aSurveyInfo.options.showpopups) > 0) %}$(".ls-softmandatory-input").hide();{% endif %}
+                    $("#{{ aSurveyInfo.id.mandatorySoftModal }}").on('click', function() {
+                        $(".ls-mandSoft-checkbox").prop('checked',true);
+                        $("#ls-button-submit").trigger('click');
+                    });
+                </script>
+                <a {{ aSurveyInfo.attr.modalfooterlink }}  class="{{ aSurveyInfo.class.modalfooterlink }}">{{ gT("Answer question") }}</a>
+            </div>
+            {% else %}
+            <div class="{{ aSurveyInfo.class.modalfooter }}" {{ aSurveyInfo.attr.modalfooter }}>
+                <a {{ aSurveyInfo.attr.modalfooterlink }}  class="{{ aSurveyInfo.class.modalfooterlink }}">{{ gT("Close") }}</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endif %}

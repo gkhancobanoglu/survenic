@@ -1,0 +1,32 @@
+<!-- Add a visual information + just Mandatory string for aria : can be improved -->
+<div class="asterisk float-start modern-asterisk-container">
+  <span class="modern-asterisk" aria-hidden='true'>*</span>
+  <span class="visually-hidden text-danger">{{ gT("(This question is mandatory)") }}</span>
+</div>
+
+<style>
+    .modern-asterisk-container {
+      margin-left: 0.2em;
+      display: inline-block;
+    }
+
+    .modern-asterisk {
+      color: #f87171;
+      font-size: 1em;
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      font-weight: 700;
+      opacity: 0.65;
+      vertical-align: baseline;
+      position: relative;
+      top: 2px;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+      text-shadow: 0 1px 4px rgba(248,113,113,0.10);
+    }
+
+    .modern-asterisk-container:focus-within .modern-asterisk,
+    .modern-asterisk-container:hover .modern-asterisk {
+      color: #dc2626;
+      opacity: 0.85;
+    }
+</style>

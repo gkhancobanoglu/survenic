@@ -1,0 +1,164 @@
+
+
+    {# Include the form opening tag #}
+    {{ include('./subviews/header/start_form.twig') }} <!-- main form -->
+
+        {# This will display the script and the hidden inputs needed for ExpressionScript Engine #}
+        {{ aSurveyInfo.EM.ScriptsAndHiddenInputs  }}
+
+
+        {# completed#}
+        <div class="quota-container">
+            <div class="quota-card">
+                <div class="quota-header">
+                    <i class="fa fa-exclamation-triangle quota-icon"></i>
+                    <h1 class="quota-title">{{ gT('Kota Limiti Doldu') }}</h1>
+                </div>
+                <div class="quota-message-area">
+                    <div class="quota-message">
+                        {{ aSurveyInfo.aQuotas.sMessage }}
+                    </div>
+                </div>
+                {% if(aSurveyInfo.aQuotas.sUrl != '') %}
+                    <div class="quota-alt-link">
+                        <a href="{{ aSurveyInfo.aQuotas.sUrl }}" class="quota-btn-alt">
+                            <i class="fa fa-arrow-right"></i>
+                            {{ aSurveyInfo.aQuotas.sUrlDescription }}
+                        </a>
+                    </div>
+                {% endif %}
+                <div class="quota-actions">
+                    <a href="/" class="quota-btn-home">
+                        <i class="fa fa-home"></i> Ana Sayfaya Dön
+                    </a>
+                </div>
+            </div>
+        </div>
+
+<style>
+.quota-container {
+    min-height: calc(100vh - 100px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #e4ecf7 100%);
+    animation: fadeInUp 0.7s cubic-bezier(.39,.575,.565,1) both;
+}
+.quota-card {
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 4px 24px 0 rgba(34,41,47,0.1);
+    padding: 2.5rem 2rem;
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.quota-header {
+    margin-bottom: 0.5rem;
+}
+.quota-icon {
+    font-size: 2.5rem;
+    color: #f6b30e;
+    margin-bottom: 0.5rem;
+}
+.quota-title {
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: #d97706;
+    margin-bottom: 0.3rem;
+}
+.quota-message-area {
+    margin-bottom: 1.5rem;
+}
+.quota-message {
+    background: #fffbe6;
+    color: #b45309;
+    border: 2px solid #f6b30e;
+    border-radius: 16px;
+    padding: 1.5rem 1.2rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+    box-shadow: 0 2px 12px 0 rgba(246,179,14,0.08);
+    margin-bottom: 1.2rem;
+}
+.quota-alt-link {
+    margin-bottom: 1.2rem;
+}
+.quota-btn-alt {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8em 2em;
+    font-size: 1.08rem;
+    font-weight: 600;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #295fa6 0%, #4a8cff 100%);
+    color: #fff !important;
+    text-decoration: none;
+    border: none;
+    box-shadow: 0 4px 15px rgba(41,95,166,0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.quota-btn-alt:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(41,95,166,0.25);
+}
+.quota-actions {
+    margin-top: 1.5rem;
+}
+.quota-btn-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8em 2em;
+    font-size: 1.08rem;
+    font-weight: 600;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #f6b30e 0%, #ffe6a0 100%);
+    color: #b45309 !important;
+    text-decoration: none;
+    border: none;
+    box-shadow: 0 4px 15px rgba(246,179,14,0.13);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.quota-btn-home:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(246,179,14,0.18);
+}
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: none;
+    }
+}
+@media (max-width: 600px) {
+    .quota-container {
+        padding: 1rem;
+    }
+    .quota-card {
+        padding: 1.2rem 0.5rem;
+        gap: 1.2rem;
+    }
+    .quota-title {
+        font-size: 1.2rem;
+    }
+    .quota-message {
+        font-size: 1em;
+        padding: 1rem 0.7rem;
+    }
+    .quota-btn-alt, .quota-btn-home {
+        width: 100%;
+        justify-content: center;
+    }
+}
+</style>

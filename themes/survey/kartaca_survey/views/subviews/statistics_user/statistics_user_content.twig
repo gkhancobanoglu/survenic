@@ -1,0 +1,73 @@
+<div class="public-stats__content modern-stats-content">
+    {% if statisticsoutput %}
+        <div class="modern-stats-table-wrapper">
+            {{ statisticsoutput
+                | replace({
+                    '<table': '<table class="modern-stats-table"',
+                    '<th': '<th class="modern-stats-th"',
+                    '<tr': '<tr class="modern-stats-tr"',
+                    '<td': '<td class="modern-stats-td"',
+                    '<tr><td>&nbsp;</td></tr>': '',
+                    '<tr><td></td></tr>': '',
+                    '<td>&nbsp;</td>': '',
+                    '<tr><th colspan="2">': '<tr class="remove-header"><th colspan="2">',
+                })
+                | raw
+            }}
+        </div>
+    {% endif %}
+</div>
+<style>
+.modern-stats-table-wrapper {
+    overflow-x: auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    padding: 1rem 0.7rem;
+    margin: 0 auto 1.2rem auto;
+}
+.modern-stats-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 1.01rem;
+    color: #23272f;
+    background: transparent;
+}
+.modern-stats-th {
+    background: #eaf4ff;
+    color: #2563eb;
+    font-weight: 700;
+    padding: 0.7em 0.8em;
+    border-bottom: 2px solid #dbeafe;
+    text-align: left;
+    font-size: 1.03rem;
+}
+.modern-stats-tr {
+    transition: background 0.14s;
+}
+.modern-stats-tr:hover {
+    background: #f0f9ff;
+}
+.modern-stats-td {
+    padding: 0.5em 0.8em;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 1.01rem;
+    color: #23272f;
+}
+.modern-stats-table tr:last-child .modern-stats-td {
+    border-bottom: none;
+}
+.modern-stats-table .remove-header {
+    display: none !important;
+}
+@media (max-width: 700px) {
+    .modern-stats-table-wrapper {
+        padding: 0.4rem 0.1rem;
+    }
+    .modern-stats-th, .modern-stats-td {
+        font-size: 0.93rem;
+        padding: 0.3em 0.3em;
+    }
+}
+</style>

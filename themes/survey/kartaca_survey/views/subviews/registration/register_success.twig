@@ -1,0 +1,95 @@
+<div class="row">
+    <div class='{{ aSurveyInfo.class.registersuccessblock }} modern-register-success-block' {{ aSurveyInfo.attr.registersuccessblock }} >
+        <div class="modern-register-success-icon">&#10003;</div>
+        <div class="modern-register-success-title">{{ gT("Registration successful!") }}</div>
+        <ul class='{{ aSurveyInfo.class.registersuccesslist }} modern-register-success-list' {{ aSurveyInfo.attr.registersuccesslist }}>
+            <li class='{{ aSurveyInfo.class.registersuccesslistitem }} modern-register-success-listitem' {{ aSurveyInfo.attr.registersuccesslistitem }}>
+                <span class="modern-register-success-label">{{ gT("First name") }}</span>
+                <span class="modern-register-success-content">{{ aSurveyInfo.sFirstName }}</span>
+            </li>
+            <li class='{{ aSurveyInfo.class.registersuccesslistitem }} modern-register-success-listitem' {{ aSurveyInfo.attr.registersuccesslistitem }}>
+                <span class="modern-register-success-label">{{ gT("Last name") }}</span>
+                <span class="modern-register-success-content">{{ aSurveyInfo.sLastName }}</span>
+            </li>
+            <li class='{{ aSurveyInfo.class.registersuccesslistitem }} modern-register-success-listitem' {{ aSurveyInfo.attr.registersuccesslistitem }}>
+                <span class="modern-register-success-label">{{ gT("Email address") }}</span>
+                <span class="modern-register-success-content">{{ aSurveyInfo.sEmail }}</span>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<style>
+    .modern-register-success-block {
+        background: linear-gradient(135deg, #e6f9f0 0%, #d2f4ea 100%);
+        border-radius: 16px;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+        color: #1a6c3a;
+        font-size: 1.08rem;
+        padding: 2.1rem 2.2rem 1.5rem 2.2rem;
+        margin: 2.2rem auto 1.5rem auto;
+        max-width: 480px;
+        text-align: center;
+        border: none;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.1rem;
+    }
+    .modern-register-success-icon {
+        font-size: 2.2rem;
+        color: #1a6c3a;
+        margin-bottom: 0.2rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .modern-register-success-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #1a6c3a;
+        margin-bottom: 0.7rem;
+        letter-spacing: -0.5px;
+    }
+    .modern-register-success-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .modern-register-success-listitem {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #fff;
+        border-radius: 8px;
+        padding: 0.7em 1.1em;
+        font-size: 1.04rem;
+        color: #1a6c3a;
+        font-weight: 500;
+        box-shadow: 0 1px 4px rgba(26,108,58,0.04);
+    }
+    .modern-register-success-label {
+        font-weight: 600;
+        color: #1e3a8a;
+    }
+    .modern-register-success-content {
+        font-weight: 500;
+        color: #1a6c3a;
+    }
+    @media (max-width: 600px) {
+        .modern-register-success-block {
+            padding: 1.1rem 0.5rem 1.1rem 0.5rem;
+            max-width: 98vw;
+        }
+        .modern-register-success-listitem {
+            font-size: 0.98rem;
+            padding: 0.5em 0.7em;
+        }
+    }
+</style>

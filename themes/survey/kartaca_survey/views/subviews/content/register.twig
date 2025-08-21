@@ -1,0 +1,145 @@
+<div class="register-container">
+    <div class="register-card">
+        <div class="register-header">
+            <i class="fa fa-user-plus register-icon"></i>
+            <h1 class="register-title">{{ gT('Kayıt Ol') }}</h1>
+            <p class="register-desc">Ankete katılmak için lütfen bilgilerinizi doldurun.</p>
+        </div>
+        <div class="register-messages">
+            {{ include('./subviews/registration/register_head.twig') }}
+            {{ include('./subviews/registration/register_message.twig') }}
+            {{ include('./subviews/registration/register_error.twig') }}
+        </div>
+        <div class="register-form-area">
+            {% set sViewContent =  './subviews/registration/' ~ aSurveyInfo.registration_view ~ '.twig' %}
+            {% include sViewContent %}
+        </div>
+    </div>
+</div>
+
+<style>
+.register-container {
+    min-height: calc(100vh - 100px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #e4ecf7 100%);
+    animation: fadeInUp 0.7s cubic-bezier(.39,.575,.565,1) both;
+}
+.register-card {
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 4px 24px 0 rgba(34,41,47,0.1);
+    padding: 2.5rem 2rem;
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.register-header {
+    margin-bottom: 0.5rem;
+}
+.register-icon {
+    font-size: 2.2rem;
+    color: #295fa6;
+    margin-bottom: 0.5rem;
+}
+.register-title {
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: #295fa6;
+    margin-bottom: 0.3rem;
+}
+.register-desc {
+    font-size: 1.08rem;
+    color: #555;
+    margin-bottom: 1.2rem;
+}
+.register-messages .alert {
+    font-size: 1.05rem;
+    border-radius: 12px;
+    margin-bottom: 1.2rem;
+    padding: 1em 1.2em;
+}
+.register-form-area form,
+.register-form-area {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: stretch;
+}
+.register-form-area input,
+.register-form-area select,
+.register-form-area textarea {
+    font-size: 1.08rem;
+    padding: 0.9em 1em;
+    border-radius: 12px;
+    border: 1px solid #e4ecf7;
+    background: #f8fafc;
+    margin-bottom: 0.5em;
+    transition: border 0.18s;
+}
+.register-form-area input:focus,
+.register-form-area select:focus,
+.register-form-area textarea:focus {
+    border-color: #295fa6;
+    outline: none;
+}
+.register-form-area button,
+.register-form-area .btn {
+    padding: 0.8em 2em;
+    font-size: 1.08rem;
+    font-weight: 600;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #295fa6 0%, #4a8cff 100%);
+    color: #fff !important;
+    border: none;
+    box-shadow: 0 4px 15px rgba(41,95,166,0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    margin-top: 1em;
+}
+.register-form-area button:hover,
+.register-form-area .btn:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(41,95,166,0.25);
+}
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: none;
+    }
+}
+@media (max-width: 600px) {
+    .register-container {
+        padding: 1rem;
+    }
+    .register-card {
+        padding: 1.2rem 0.5rem;
+        gap: 1.2rem;
+    }
+    .register-title {
+        font-size: 1.2rem;
+    }
+    .register-form-area input,
+    .register-form-area select,
+    .register-form-area textarea {
+        font-size: 1em;
+        padding: 0.7em 0.7em;
+    }
+    .register-form-area button,
+    .register-form-area .btn {
+        width: 100%;
+    }
+}
+</style>

@@ -1,0 +1,43 @@
+{#
+    Survenic
+    Copyright (C) 2025 Kartaca Bilişim A.Ş.
+    All rights reserved.
+#}
+
+{% if(aSurveyInfo.jYesNo) %}
+    {{ registerScript('activateConfirmLanguage',"$.extend(LSvar.lang," ~ aSurveyInfo.jYesNo ~ ")", "POS_BEGIN") }}
+{% endif %}
+{{ registerScript('activateActionLink',"activateActionLink();", "POS_POSTSCRIPT") }}
+{{ registerScript('activateConfirmButton',"activateConfirmButton();", "POS_POSTSCRIPT") }}
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+    <meta name="generator" content="Survenic by Kartaca" />
+    <meta name="description" content="{{ aSurveyInfo.surveyls_description|default('Online Survey Platform') }}" />
+    <meta name="author" content="Kartaca Bilişim A.Ş." />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#295fa6" />
+    {{ aSurveyInfo.metas }}
+    <title>{{ processString(aSurveyInfo.surveyls_title,1) }}</title>
+    {% if(imageSrc('./files/survenic.ico')) %}
+        <link rel="icon" type="image/x-icon" href="{{ imageSrc('./files/survenic.ico') }}" />
+    {% endif %}
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="{{ imageSrc('./files/survenic.ico') }}" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <script type="text/javascript">
+        if(window.basicThemeScripts === undefined){ 
+            window.basicThemeScripts = new ThemeScripts(); 
+        } 
+    </script>
+    {{ registerScript("LSvarTemplateInit","LSvar= LSvar || {};","POS_HEAD") }}
+    {% if(aSurveyInfo.options.fixnumauto and aSurveyInfo.options.fixnumauto != "off") %}
+        {{ registerScript("LSvarTemplateRealFixNumAuto","LSvar.bFixNumAuto = "~(aSurveyInfo.options.fixnumauto == "enable" ? 1 : 0)~";","POS_HEAD") }}
+        {{ registerScript("LSvarTemplateRealNumRealValue","LSvar.bNumRealValue = "~(aSurveyInfo.options.fixnumauto == "disable" ? 1 : 0)~";","POS_HEAD") }}
+    {% endif %}
+    {{ include('./subviews/header/custom_header.twig') }}
+    {{ include('./subviews/header/google_analytics.twig') }}
+</head>

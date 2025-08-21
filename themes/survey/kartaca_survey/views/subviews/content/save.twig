@@ -1,0 +1,218 @@
+{# Include the form opening tag #}
+{{ include('./subviews/header/start_form.twig') }} <!-- main form -->
+    {{ aSurveyInfo.EM.ScriptsAndHiddenInputs }}
+    <div class="save-container">
+        <div class="save-card">
+            <div class="save-header">
+                <i class="fa fa-save save-icon"></i>
+                <h1 class="save-title">{{ gT('Anketini Kaydet ve Sonra Devam Et') }}</h1>
+                <p class="save-desc">Dilersen anketini kaydedip daha sonra kaldığın yerden devam edebilirsin.</p>
+            </div>
+            <div class="save-step">
+                <ol class="save-steps">
+                    <li><b>Adım 1:</b> Bir isim ve şifre belirle.</li>
+                    <li><b>Adım 2:</b> (İsteğe bağlı) E-posta adresini gir, detaylar sana gönderilsin.</li>
+                    <li><b>Adım 3:</b> Kaydet butonuna tıkla ve dilediğin zaman devam et.</li>
+                </ol>
+            </div>
+            <div class="save-messages">
+                {% if count(aSurveyInfo.aSaveForm.aErrors) > 0 %}
+                    <div class="alert alert-danger save-alert">
+                        <ul class="list-unstyled">
+                            {% for key,error in aSurveyInfo.aSaveForm.aErrors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                <div class="alert alert-info save-info">
+                    <p>{{ gT("Anonim kalmak için takma ad kullanabilirsin, e-posta zorunlu değildir.") }}</p>
+                </div>
+            </div>
+            <div class="save-form-area">
+                {{
+                    C.Html.form(
+                        ( aSurveyInfo.surveyUrl ),
+                        'post',
+                        {
+                            'id': 'form-save',
+                            'name': 'form-save',
+                            'class': 'ls-form',
+                        }
+                    )
+                }}
+                    {{ aSurveyInfo.aSaveForm.sHiddenField }}
+                    <div class="save-form-fields">
+                        <input id="savename" name="savename" class="save-input" type="text" required placeholder="{{ gT('İsim (zorunlu)') }}" value="{{ getPost('savename') }}" />
+                        <input id="savepass" name="savepass" class="save-input" type="password" required placeholder="{{ gT('Şifre (zorunlu)') }}" />
+                        <input id="savepass2" name="savepass2" class="save-input" type="password" required placeholder="{{ gT('Şifre (tekrar)') }}" />
+                        <input id="saveemail" name="saveemail" class="save-input" type="email" placeholder="{{ gT('E-posta (isteğe bağlı)') }}" />
+                        {% if aSurveyInfo.aSaveForm.aCaptcha.show %}
+                            <div class="save-captcha">
+                                <img src="{{ aSurveyInfo.aSaveForm.aCaptcha.sImageUrl }}" class="save-captcha-img" />
+                                <input class="save-input" type="text" placeholder="{{ gT('Güvenlik kodu') }}" />
+                            </div>
+                        {% endif %}
+                    </div>
+                    <button type="submit" class="save-btn">{{ gT('Şimdi Kaydet') }}</button>
+                </form>
+            </div>
+            <div class="save-return">
+                <a href="{{ aSurveyInfo.surveyUrl }}" class="save-return-link">{{ gT('Ankete Geri Dön') }}</a>
+            </div>
+        </div>
+    </div>
+<style>
+.save-container {
+    min-height: calc(100vh - 100px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #e4ecf7 100%);
+    animation: fadeInUp 0.7s cubic-bezier(.39,.575,.565,1) both;
+}
+.save-card {
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 4px 24px 0 rgba(34,41,47,0.1);
+    padding: 2.5rem 2rem;
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.save-header {
+    margin-bottom: 0.5rem;
+}
+.save-icon {
+    font-size: 2.2rem;
+    color: #295fa6;
+    margin-bottom: 0.5rem;
+}
+.save-title {
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: #295fa6;
+    margin-bottom: 0.3rem;
+}
+.save-desc {
+    font-size: 1.08rem;
+    color: #555;
+    margin-bottom: 1.2rem;
+}
+.save-step {
+    margin-bottom: 1rem;
+}
+.save-steps {
+    text-align: left;
+    font-size: 1.05rem;
+    color: #444;
+    margin: 0 auto;
+    padding: 0 0 0 1.2em;
+    max-width: 340px;
+}
+.save-messages .alert {
+    font-size: 1.05rem;
+    border-radius: 12px;
+    margin-bottom: 1.2rem;
+    padding: 1em 1.2em;
+}
+.save-form-area form,
+.save-form-area {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: stretch;
+}
+.save-form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.save-input {
+    font-size: 1.08rem;
+    padding: 0.9em 1em;
+    border-radius: 12px;
+    border: 1px solid #e4ecf7;
+    background: #f8fafc;
+    margin-bottom: 0.5em;
+    transition: border 0.18s;
+}
+.save-input:focus {
+    border-color: #295fa6;
+    outline: none;
+}
+.save-btn {
+    padding: 0.8em 2em;
+    font-size: 1.08rem;
+    font-weight: 600;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #295fa6 0%, #4a8cff 100%);
+    color: #fff !important;
+    border: none;
+    box-shadow: 0 4px 15px rgba(41,95,166,0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    margin-top: 1em;
+}
+.save-btn:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(41,95,166,0.25);
+}
+.save-captcha {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    justify-content: center;
+}
+.save-captcha-img {
+    height: 38px;
+    border-radius: 8px;
+    background: #f8fafc;
+    box-shadow: 0 1px 4px 0 rgba(41,95,166,0.08);
+}
+.save-return {
+    margin-top: 1.5rem;
+}
+.save-return-link {
+    color: #295fa6;
+    font-weight: 600;
+    text-decoration: underline;
+    font-size: 1.05rem;
+}
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: none;
+    }
+}
+@media (max-width: 600px) {
+    .save-container {
+        padding: 1rem;
+    }
+    .save-card {
+        padding: 1.2rem 0.5rem;
+        gap: 1.2rem;
+    }
+    .save-title {
+        font-size: 1.2rem;
+    }
+    .save-input {
+        font-size: 1em;
+        padding: 0.7em 0.7em;
+    }
+    .save-btn {
+        width: 100%;
+    }
+}
+</style>

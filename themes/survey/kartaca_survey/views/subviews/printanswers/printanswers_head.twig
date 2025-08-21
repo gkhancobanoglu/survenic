@@ -1,0 +1,47 @@
+
+{#
+    (¯`·._.·(¯`·._.· Registration form._.·´¯)·._.·´¯)
+
+    This is the head for the printanswers table.
+    It is used for the rendering of the responses at the end of the survey.
+
+#}
+
+{% if (aSurveyInfo.printPdf == 1) %} 
+{{ include('./subviews/printanswers/printanswers_style.twig') }}
+<style> 
+    body{ 
+        font-size: 11pt;
+        line-height: 80%; 
+    } 
+    div{
+        margin: 0;
+        padding: 0;
+    }
+    .question-container-printanswers{
+        line-height: 125%;
+    }
+</style> 
+{% endif %}
+{# {{dump(aSurveyInfo.groupArray)}} #}
+<div class="container">
+    {% if (aSurveyInfo.printPdf != 1) %} 
+        <div class="row">
+            <div class="col-sm-6">
+                {{ C.Html.form(aSurveyInfo.printAnswersHeadFormUrl, 'post') }}
+                    {{ gT("Export these responses as PDF:") }} <button class="btn btn-outline-secondary" type="submit">{{ gT("PDF export") }}</button>
+                {{ C.Html.endForm }}
+            </div>
+            <div class="col-sm-6">
+                {{ C.Html.form(aSurveyInfo.printAnswersHeadFormQueXMLUrl, 'post') }}
+                    {{ gT("Export these responses as queXML PDF:") }} <button class="btn btn-outline-secondary" type="submit">{{ gT("queXML PDF export") }}</button>
+                {{ C.Html.endForm }}
+            </div>
+        </div>
+        <div class="row">
+        <br/>
+        </div>
+    {% endif %}
+
+
+

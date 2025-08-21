@@ -1,0 +1,56 @@
+{#
+(¯`·._.·(¯`·._.· Clear all links: Shows the exit button ·._.·´¯)·._.·´¯)
+
+This file render the exit button for top menu bar
+#}
+
+{# It must not be shown once survey is completed #}
+{# aSurveyInfo.options.bShowClearAll is a user option to decide if the "exit and clear" button should be shown #}
+{# aSurveyInfo.bShowClearAll is define in core, so if option is on, it's not shown in welcome and submit page. #}
+
+
+ {% if aSurveyInfo.bShowClearAll == true or aSurveyInfo.bShowClearAll == null %}
+     {% if aSurveyInfo.options.showclearall == 'on' %}
+         <!-- Exit and clear survey -->
+         <li class="nav-item ls-no-js-hidden px-2">
+             <a href="#" class='modern-clearall-link ls-link-action ls-link-clearall'
+                data-limesurvey-submit='{ "clearall":"clearall" }'
+                data-confirmedby='{ "confirm-clearall":"confirm" }'
+                data-confirmlabel='{{ gT("Please confirm you want to clear your response?" ) }}'>
+                 {{ gT("Exit and clear survey" ) }}
+             </a>
+         </li>
+     {% endif %}
+ {% endif %}
+
+<style>
+    .modern-clearall-link {
+        font-size: 0.98rem;
+        font-weight: 500;
+        border-radius: 7px;
+        padding: 0.38rem 1.1rem;
+        background: #fff0f0;
+        color: #b3261e !important;
+        border: 1.5px solid #ffbdbd;
+        transition: background 0.16s, color 0.16s, border 0.16s;
+        outline: none;
+        display: inline-block;
+        cursor: pointer;
+        margin: 0.1rem 0.3rem 0.1rem 0;
+        text-decoration: none;
+        letter-spacing: 0.01em;
+    }
+    .modern-clearall-link:focus, .modern-clearall-link:hover {
+        background: #ffeaea;
+        color: #a31515 !important;
+        border-color: #ffbdbd;
+        text-decoration: none;
+    }
+    @media (max-width: 600px) {
+        .modern-clearall-link {
+            font-size: 0.95rem;
+            padding: 0.32rem 0.7rem;
+            width: 100%;
+        }
+    }
+</style>

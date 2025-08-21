@@ -1,0 +1,167 @@
+
+{#
+    (¯`·._.·(¯`·._.· Registration form._.·´¯)·._.·´¯)
+
+    This is the registration form for participant registration on a survey.
+
+#}
+
+<div class="{{ aSurveyInfo.class.registerform }} row modern-register-form-card" {{ aSurveyInfo.attr.registerform }}>
+    {{ C.Html.form(aSurveyInfo.sRegisterFormUrl,'post',({'id' : 'limesurvey', 'role' : 'form', 'class' : 'form'})) }}
+
+    {{aSurveyInfo.registerform.hiddeninputs}}
+
+    <div class='{{ aSurveyInfo.class.registerformcol }} col-lg-8 offset-lg-2' {{ aSurveyInfo.attr.registerformcol }}>
+        <div class="ls-js-hidden mb-3">
+            {{ include('./subviews/navigation/language_changer.twig') }}
+        </div>
+        {# Participants first name #}
+        <div class='{{ aSurveyInfo.class.registerformcolrow }} mb-3 modern-register-form-group' {{ aSurveyInfo.attr.registerformcolrow }}>
+            <label for='register_firstname' class='{{ aSurveyInfo.class.registerformcolrowlabel }} control-label modern-register-label'>{{ gT("First name:") }}</label>
+            <div class="">
+                {{ C.Html.textField('register_firstname', aSurveyInfo.sFirstName, ({'id' : 'register_firstname','class' : 'form-control modern-register-input'})) }}
+            </div>
+        </div>
+
+        {# Participants last name #}
+        <div class='{{ aSurveyInfo.class.registerformcolrowb }} mb-3 modern-register-form-group' {{ aSurveyInfo.attr.registerformcolrowb }}>
+            <label {{ aSurveyInfo.attr.registerformcolrowblabel }}  class='{{ aSurveyInfo.class.registerformcolrowblabel }} control-label modern-register-label'>{{ gT("Last name:") }}</label>
+            <div {{ aSurveyInfo.attr.registerformcolrowbdiv }} >
+                {{ C.Html.textField('register_lastname', aSurveyInfo.sLastName, ({'id' : 'register_lastname', 'class' : 'form-control modern-register-input'})) }}
+            </div>
+        </div>
+
+        {# Participants email #}
+        <div class='{{ aSurveyInfo.class.registerformcolrowc }} mb-3 modern-register-form-group' {{ aSurveyInfo.attr.registerformcolrowc }}>
+            <label {{ aSurveyInfo.attr.registerformcolrowclabel }} class='{{ aSurveyInfo.class.registerformcolrowclabel }}  control-label modern-register-label'> {{ gT("Email address:") }} {{ include('./subviews/registration/required.twig') }}</label>
+            <div {{ aSurveyInfo.attr.registerformcolrowcdiv }}  >
+                {{ C.Html.emailField('register_email', aSurveyInfo.sEmail, ({'id' : 'register_email','class' : 'form-control modern-register-input','required' : true})) }}
+            </div>
+        </div>
+
+        {# Loop to add extra attributes #}
+        {% for key, aExtraAttribute in aSurveyInfo.aExtraAttributes  %}
+            <div class=' {{ aSurveyInfo.class.registerformextras }} mb-3 modern-register-form-group' {{ aSurveyInfo.attr.registerformextras }} >
+                {% set registerKey = "register_" ~ key %}
+                <label for="{{ registerKey }}" class='{{ aSurveyInfo.class.registerformextraslabel }} control-label modern-register-label'> {{ aExtraAttribute.caption }} {% if aExtraAttribute.mandatory == 'Y' %}{{ include('./subviews/registration/required.twig') }}{% endif %}</label>
+                <div {{ aSurveyInfo.attr.registerformcolrowcdiv }} >
+                    {{ C.Html.textField(registerKey, aSurveyInfo.aAttribute[key],({'id' : registerKey,'class' : 'form-control modern-register-input'})) }}
+                </div>
+            </div>
+        {% endfor %}
+
+        {# Captcha box #}
+        {% if aSurveyInfo.bCaptcha %}
+            <div class="{{ aSurveyInfo.class.registerformcaptcha }} mb-3 modern-register-form-group" {{ aSurveyInfo.attr.maincolformdivb }}>
+                <label class='{{ aSurveyInfo.class.registerformcaptchalabel }} control-label modern-register-label' {{ aSurveyInfo.attr.registerformcaptchalabel }} >{{ gT("Please solve the following equation:") }} {{ include('./subviews/registration/required.twig') }}</label>
+                <div class="row" {{ aSurveyInfo.attr.registerformcaptchadiv }}>
+                    <div class="{{ aSurveyInfo.class.registerformcaptchadivb }} col-2" {{ aSurveyInfo.attr.registerformcaptchadivb }}>
+                            {{ renderCaptcha().renderOut() }}
+                    </div>
+                    <div class="{{ aSurveyInfo.class.registerformcaptchadivc }} col-1 align-self-center" {{ aSurveyInfo.attr.registerformcaptchadivc }}>
+                        <a href="#" class="btn btn-sm btn-outline-secondary" id="reloadCaptcha" title="{{ gT("Reload captcha") }}" data-bs-toggle="captcha"><i class="fa fa-refresh"></i></a>
+                    </div>
+                    <div class="col-9 align-self-center">
+                        <input class='form-control modern-register-input {{ aSurveyInfo.class.registerformcaptchainput }}' {{ aSurveyInfo.attr.registerformcaptchainput }}>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        {# Mandatory information #}
+        <div class='{{ aSurveyInfo.class.registermandatoryinfo }} modern-register-mandatoryinfo' {{ aSurveyInfo.attr.registermandatoryinfo }} >
+                {{ gT('Fields marked with an asterisk are mandatory.')}}
+        </div>
+
+        {# Submit register button #}
+        <div class='{{ aSurveyInfo.class.registersave }} mb-3' {{ aSurveyInfo.attr.registersave }} >
+            <div class='{{ aSurveyInfo.class.registersavediv }} float-end' {{ aSurveyInfo.attr.registersavediv }} >
+                {% set continue = gT("Continue",'unescaped') %}
+                <button {{ aSurveyInfo.attr.registersavedivbutton }}  class='{{ aSurveyInfo.class.registersavedivbutton }} modern-register-btn' >
+                    {{ continue }}
+                </button>
+            </div>
+        </div>
+
+        {# If there is additional form parts, a.e. trhough a plugin render it out here #}
+    </div>
+    <div class='{{ aSurveyInfo.class.registerformcoladdidtions }} col-lg-8 offset-lg-2' {{ aSurveyInfo.attr.registerformcoladdidtions }}>
+        {{ aSurveyInfo.formAdditions | raw  }}
+    </div>
+
+    {{ C.Html.endForm }}
+</div>
+
+<style>
+    .modern-register-form-card {
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+        padding: 2.2rem 2.2rem 1.5rem 2.2rem;
+        margin: 2.2rem auto 1.5rem auto;
+        max-width: 540px;
+        font-family: inherit;
+    }
+    .modern-register-form-group {
+        margin-bottom: 1.3rem !important;
+    }
+    .modern-register-label {
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: #1e3a8a;
+        margin-bottom: 0.4rem;
+        display: block;
+    }
+    .modern-register-input {
+        border-radius: 8px;
+        border: 1.5px solid #dbeafe;
+        font-size: 1.04rem;
+        padding: 0.55rem 1.1rem;
+        color: #23272f;
+        background: #f8fafc;
+        transition: border 0.16s, box-shadow 0.16s;
+        box-shadow: none;
+        outline: none;
+    }
+    .modern-register-input:focus {
+        border: 1.5px solid #2563eb;
+        box-shadow: 0 0 0 2px #0d6efd22;
+        background: #fff;
+    }
+    .modern-register-btn {
+        background: linear-gradient(90deg, #2563eb 0%, #0d6efd 100%);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 0.6rem 1.7rem;
+        font-weight: 700;
+        font-size: 1.08rem;
+        transition: background 0.16s, color 0.16s;
+        outline: none;
+        box-shadow: 0 2px 8px rgba(13,110,253,0.08);
+        margin-top: 0.7rem;
+        margin-bottom: 0.7rem;
+    }
+    .modern-register-btn:hover, .modern-register-btn:focus {
+        background: linear-gradient(90deg, #0d6efd 0%, #2563eb 100%);
+        color: #fff;
+    }
+    .modern-register-mandatoryinfo {
+        font-size: 0.97rem;
+        color: #7a4f01;
+        background: #fffbe6;
+        border-radius: 7px;
+        padding: 0.5em 1em;
+        margin: 1.1em 0 1.2em 0;
+        box-shadow: 0 2px 8px rgba(255,193,7,0.07);
+        font-weight: 500;
+        letter-spacing: 0.01em;
+        display: inline-block;
+    }
+    @media (max-width: 700px) {
+        .modern-register-form-card {
+            padding: 1.1rem 0.5rem 1.1rem 0.5rem;
+            max-width: 98vw;
+        }
+    }
+</style>

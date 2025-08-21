@@ -1,0 +1,162 @@
+<div class="preview-container">
+    <div class="preview-card">
+        <div class="preview-header">
+            <i class="fa fa-eye preview-icon"></i>
+            <h1 class="preview-title">{{ gT('Cevaplarınızı Kontrol Edin') }}</h1>
+            <p class="preview-desc">Lütfen cevaplarınızı gözden geçirin. Gerekirse düzenleyebilir veya onaylayarak gönderebilirsiniz.</p>
+        </div>
+        <div class="preview-summary">
+            {% block endtext %}
+                <div class="alert alert-warning preview-alert">
+                    <strong class="h4 text-danger">{{ gT("Did Not Save") }} </strong>
+                    {{ gT("Your survey responses have not been recorded. This survey is not yet active.") }}
+                </div>
+            {% endblock %}
+            <div class="preview-answers">
+                {# Burada cevapların özetini gösteren bir tablo veya liste beklenir. #}
+                {{ aSurveyInfo.aCompleted.sPreviewAnswers|raw }}
+            </div>
+        </div>
+        <div class="preview-actions">
+            <a href="{{ aSurveyInfo.editUrl ?? '#' }}" class="preview-btn edit-btn">
+                <i class="fa fa-edit"></i> {{ gT('Düzenle') }}
+            </a>
+            <a href="{{ aSurveyInfo.confirmUrl ?? '#' }}" class="preview-btn confirm-btn">
+                <i class="fa fa-check"></i> {{ gT('Onayla ve Gönder') }}
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+.preview-container {
+    min-height: calc(100vh - 100px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #e4ecf7 100%);
+    animation: fadeInUp 0.7s cubic-bezier(.39,.575,.565,1) both;
+}
+.preview-card {
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 4px 24px 0 rgba(34,41,47,0.1);
+    padding: 2.5rem 2rem;
+    max-width: 700px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.preview-header {
+    margin-bottom: 0.5rem;
+}
+.preview-icon {
+    font-size: 2.5rem;
+    color: #295fa6;
+    margin-bottom: 0.5rem;
+}
+.preview-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #295fa6;
+    margin-bottom: 0.3rem;
+}
+.preview-desc {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 1.2rem;
+}
+.preview-summary {
+    background: #f8fafc;
+    border-radius: 16px;
+    padding: 1.5rem;
+    color: #444;
+    font-size: 1.08rem;
+    line-height: 1.6;
+    text-align: left;
+    margin-bottom: 1.2rem;
+    overflow-x: auto;
+}
+.preview-alert {
+    margin-bottom: 1.2rem;
+}
+.preview-answers {
+    border-top: 1px solid #e4ecf7;
+    padding-top: 1.2rem;
+    margin-top: 1.2rem;
+    font-size: 1.05em;
+    color: #222;
+    max-height: 320px;
+    overflow-y: auto;
+}
+.preview-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+.preview-btn {
+    padding: 0.8em 2em;
+    font-size: 1.08rem;
+    font-weight: 600;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #295fa6 0%, #4a8cff 100%);
+    color: #fff !important;
+    text-decoration: none;
+    border: none;
+    box-shadow: 0 4px 15px rgba(41,95,166,0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.preview-btn.edit-btn {
+    background: linear-gradient(90deg, #f6b30e 0%, #ffe6a0 100%);
+    color: #222 !important;
+}
+.preview-btn:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(41,95,166,0.25);
+}
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: none;
+    }
+}
+@media (max-width: 768px) {
+    .preview-container {
+        padding: 1rem;
+    }
+    .preview-card {
+        padding: 1.2rem 0.5rem;
+        gap: 1.2rem;
+    }
+    .preview-title {
+        font-size: 1.3rem;
+    }
+    .preview-summary {
+        padding: 1rem;
+        font-size: 1em;
+    }
+    .preview-actions {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    .preview-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+</style>
+

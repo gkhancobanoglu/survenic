@@ -1,0 +1,174 @@
+{# render the layout_global content block #}
+
+{# Include the alert for no JavaScript #}
+{{ include('./subviews/messages/no_js_alert.twig') }}
+
+{# Include the language changer selector #}
+{{ include('./subviews/navigation/language_changer_first_page.twig') }}
+
+<div class="welcome-container">
+    <div class="welcome-card">
+        {# Logo veya ikon #}
+        {% if aSurveyInfo.options.brandlogo == "on" %}
+            <div class="welcome-logo">
+                {{ image(aSurveyInfo.options.brandlogofile, aSurveyInfo.name, {"class": "img-fluid welcome-logo-img"}) }}
+            </div>
+        {% endif %}
+
+        {# Başlık ve Açıklama #}
+        <div class="welcome-content">
+            <h1 class="welcome-title">{{ aSurveyInfo.name }}</h1>
+            {% if aSurveyInfo.description %}
+                <div class="welcome-description">{{ aSurveyInfo.description }}</div>
+            {% endif %}
+        </div>
+
+        {# Form ve Başla Butonu #}
+        {{ include('./subviews/header/start_form.twig') }}
+            {{ aSurveyInfo.EM.ScriptsAndHiddenInputs }}
+
+            {# Mesajlar (kutusuz) #}
+            {{ include('./subviews/messages/welcome.twig') }}
+            {{ include('./subviews/privacy/privacy.twig') }}
+
+            <div class="welcome-navigator">
+                {{ include('./subviews/navigation/navigator.twig') }}
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+.welcome-container {
+    min-height: calc(100vh - 100px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    animation: fadeInUp 0.7s ease-out both;
+}
+
+.welcome-card {
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+    padding: 2.5rem 2rem;
+    max-width: 680px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+}
+
+.welcome-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #295fa6 0%, #4a8cff 100%);
+}
+
+.welcome-logo {
+    margin-bottom: 2rem;
+}
+
+.welcome-logo-img {
+    max-height: 80px;
+    width: auto;
+}
+
+.welcome-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 0.5rem;         
+    line-height: 1.2;              
+}
+
+.welcome-description {
+    margin-top: 1.1rem;         
+    font-size: 1.1rem;
+    color: #475569;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.welcome-navigator {
+    margin-top: 2rem;
+}
+
+.welcome-navigator .btn {
+    padding: 0.75em 2.2em;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #295fa6 0%, #4a8cff 100%);
+    color: #fff;
+    border: none;
+    box-shadow: 0 4px 12px rgba(41, 95, 166, 0.15);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.welcome-navigator .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(41, 95, 166, 0.25);
+}
+
+.privacy-container {
+    text-align: left;
+    margin-top: 1.5rem;
+    padding: 1.25rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background: #fefefe;
+    color: #374151;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.privacy-consent {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+    font-weight: 600;
+    color: #1e3a8a;
+}
+
+.privacy-consent input[type="checkbox"] {
+    margin-right: 0.5rem;
+    accent-color: #295fa6;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .welcome-container {
+        padding: 1rem;
+    }
+    .welcome-card {
+        padding: 1.5rem 1rem;
+    }
+    .welcome-title {
+        font-size: 1.8rem;
+    }
+    .welcome-description {
+        font-size: 1rem;
+    }
+}
+</style>
+
+{{ registerScript("BasicFirstPageThemeScripts", "
+    if(window.basicThemeScripts === undefined){ 
+        window.basicThemeScripts = new ThemeScripts(); 
+    } 
+", 'POS_POSTSCRIPT') }}

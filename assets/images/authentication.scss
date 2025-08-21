@@ -1,0 +1,148 @@
+.logo-alt-1 {
+  background: url(../../../../assets/images/survenic-logo.png) no-repeat center;
+  background-size: contain;
+  width: 240px;
+  height: 64px;
+}
+
+.login {
+  .main-body {
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  .login-panel {
+    max-width: 460px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+    h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      text-align: center;
+      color: #212529;
+      margin-bottom: 0.8rem;
+    }
+
+    p {
+      text-align: center;
+      color: #6c757d;
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    select,
+    .select2 {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      border: 1px solid #ced4da;
+      border-radius: 6px;
+      background-color: #f8f9fa;
+      transition: all 0.2s ease;
+      margin-bottom: 1rem;
+
+      &:focus {
+        background-color: #ffffff;
+        outline: none;
+        border-color: #66afe9;
+        box-shadow: 0 0 0 3px rgba(102, 175, 233, 0.4);
+      }
+    }
+
+    button.btn-primary {
+      background-color: #28a745;
+      border-color: #28a745;
+      padding: 0.6rem 1rem;
+      font-size: 1rem;
+      font-weight: 500;
+      border-radius: 6px;
+      transition: background-color 0.2s ease-in-out;
+      width: 100%;
+
+      &:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+      }
+    }
+
+    .forgot {
+      text-align: center;
+      margin-top: 1rem;
+
+      a {
+        color: #20c997;
+        text-decoration: none;
+        font-size: 0.9rem;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  .col-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px 80px;
+    flex: 1;
+    background-color: #f7f9fb;
+
+    @media (max-width: 768px) {
+      padding: 30px;
+    }
+  }
+
+  .sidebar-l {
+    background: linear-gradient(
+      160deg,
+      #001d3d,
+      #0a1f4a
+    ); // daha derin lacivert geçişli arka plan
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 40px;
+
+    .box-left {
+      .logo {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2rem;
+
+        img {
+          max-width: 160px;
+          filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+        }
+      }
+
+      h2 {
+        color: #ffffff;
+        font-size: 1.8rem;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+      }
+
+      p {
+        color: #ced4da;
+        font-size: 1rem;
+        margin-top: 0.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,180 @@
+{# Privacy with modal #}
+<div class="modern-privacy-text-block">
+    {% set describeprivacy = "" %}
+    {% if aSurveyInfo.datasecurity_notice %}
+        <div class="modern-privacy-text-window {{ aSurveyInfo.class.privacydatasectextbody }}" id="datasecurity_notice">
+            {{ aSurveyInfo.datasecurity_notice }}
+        </div>
+        {% set describeprivacy = "datasecurity_notice" %}
+    {% endif %}
+
+    <div id="datasecurity_error" class="modern-datasecurity-error" style="display:none;">
+        <span class="modern-datasecurity-error-text">{{ aSurveyInfo.datasecurity_error }}</span>
+        <button type="button" aria-label="{{gT('Close')}}" class="modern-datasecurity-error-close" onclick="this.parentElement.style.display='none';">
+            &times;
+        </button>
+    </div>
+
+    <div class="modern-privacy-check-wrapper">
+        <input required class="modern-privacy-checkbox" type="checkbox" name="datasecurity_accepted" id="datasecurity_accepted"
+               {% if describeprivacy %} aria-describedby="{{describeprivacy}}" {% endif %} />
+        <label for="datasecurity_accepted" class="modern-privacy-label modern-privacy-datasecurity-label">
+            {{ aSurveyInfo.datasecurity_notice_label }}
+        </label>
+    </div>
+</div>
+
+<style>
+    .modern-privacy-text-block {
+    background: #fdfdfd;
+    border: 1.5px solid #e0e7ff;
+    border-radius: 16px;
+    padding: 1.8rem 2rem;
+    box-shadow: 0 6px 18px rgba(30, 64, 175, 0.08);
+    max-width: 650px;
+    margin: 2rem auto;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    text-align: center;
+    color: #1e3a8a;
+    transition: all 0.3s ease;
+}
+
+    .modern-privacy-text-window {
+        font-size: 1.08rem;
+        color: #23272f;
+        line-height: 1.7;
+        margin-bottom: 1.2rem;
+        word-break: break-word;
+    }
+
+    .modern-privacy-check-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 18px;
+        margin-top: 1.6rem;
+        flex-wrap: wrap;
+        text-align: center;
+    }
+
+    .modern-privacy-checkbox {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 22px;
+        height: 22px;
+        border: 2px solid #2563eb;
+        border-radius: 4px;
+        background-color: transparent;
+        cursor: pointer;
+        position: relative;
+        transition: border-color 0.2s ease-in-out;
+        margin: 0;
+        flex-shrink: 0;
+    }
+
+    .modern-privacy-checkbox:checked::after {
+        content: "";
+        position: absolute;
+        left: 5px;
+        top: 2px;
+        width: 6px;
+        height: 10px;
+        border: solid #2563eb;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+    }
+
+    .modern-privacy-label,
+    .modern-privacy-datasecurity-label {
+        font-size: 1.05rem;
+        font-weight: 500;
+        color: #1e3a8a;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1.5;
+        max-width: 80%;
+    }
+
+    .modern-datasecurity-error {
+        background: #fff5f5;
+        color: #b13a3a;
+        border: 1.5px solid #f5b7b7;
+        border-radius: 10px;
+        box-shadow: 0 2px 12px rgba(177,58,58,0.07);
+        padding: 1rem 1.5rem;
+        margin-top: 1rem;
+        font-size: 1.04rem;
+        display: flex;
+        justify-content: space-between;
+        animation: modernErrorFadeIn 0.4s;
+    }
+
+    .modern-datasecurity-error-close {
+        all: unset;
+        cursor: pointer;
+        font-size: 1.3rem;
+        color: #6b7280;
+        margin-left: 0.6rem;
+        opacity: 0.6;
+        transition: opacity 0.2s ease;
+    }
+
+    .modern-datasecurity-error-close:hover {
+        opacity: 1;
+    }
+
+    @keyframes modernErrorFadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: none; }
+    }
+
+    @media (max-width: 700px) {
+        .modern-privacy-check-wrapper {
+            flex-direction: column;
+        }
+
+        .modern-privacy-label,
+        .modern-privacy-datasecurity-label {
+            font-size: 0.95rem;
+            text-align: center;
+            justify-content: center;
+        }
+    }
+    
+    .modern-privacy-datasecurity-label.checked {
+    color: white !important;
+    }
+    
+</style>
+
+<script>
+$(function() {
+    function updatePrivacyLabelColor() {
+        if ($('#datasecurity_accepted').prop('checked')) {
+            $('.modern-privacy-datasecurity-label').addClass('checked');
+        } else {
+            $('.modern-privacy-datasecurity-label').removeClass('checked');
+        }
+    }
+
+    updatePrivacyLabelColor();
+
+    $("#datasecurity_accepted").on("change", function() {
+        updatePrivacyLabelColor();
+        if ($(this).prop('checked')) {
+            $('#datasecurity_error').fadeOut(100);
+        }
+    });
+
+    $("#ls-button-submit").on("click", function() {
+        if (!$('#datasecurity_accepted').prop('checked')) {
+            $('#datasecurity_error').fadeIn(150).attr("role", "alert");
+            $('#datasecurity_accepted').attr("aria-describedby", "datasecurity_error {{ datasecuritynotice }}");
+        } else {
+            $('#datasecurity_error').fadeOut(100);
+        }
+    });
+});
+</script>

@@ -1,0 +1,2 @@
+## About
+Kartaca Survey Theme

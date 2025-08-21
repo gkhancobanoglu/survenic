@@ -1,0 +1,22 @@
+<!-- Question text -->
+<div class="modern-question-title col-12" {{ aSurveyInfo.attr.questiontitlecontainer }}>
+    {{ include('./subviews/survey/question_subviews/question_text_content.twig') }}
+</div>
+
+<style>
+    .modern-question-title {
+        font-family: 'Inter', 'Segoe UI', sans-serif;
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: #1f2937;
+        margin-bottom: 0.8rem;
+        padding-left: 0.2rem;
+        padding-right: 0.2rem;
+    }
+
+    @media (max-width: 768px) {
+        .modern-question-title {
+            font-size: 1.05rem;
+        }
+    }
+</style>

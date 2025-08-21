@@ -1,0 +1,23 @@
+{#
+    (¯`·._.·(¯`·._.· Public Statistics Layout  ·._.·´¯)·._.·´¯)
+
+    This is the layout that will be used to show the public statistics. 
+
+#}
+{% extends 'layout_global.twig' %}
+{% block ajaxindicator %}{% endblock %}
+{% block pjaxbegin %}{% endblock %}
+{% block body %}
+    {% block nav_bar %}
+        {{ parent() }}
+    {% endblock %}
+    {{ registerScript("StatisticsUserBaseScripts", "var graphUrl = '" ~ graphUrl ~ "';", "POS_BEGIN") }}
+    {% block content %}
+        {% set sViewContent =  './subviews/content/' ~ aSurveyInfo.include_content ~ '.twig' %}
+        {% include './subviews/content/outerframe.twig' with {'include_content': sViewContent } %}
+    {% endblock %}
+{% endblock %}
+{% block footer %}
+    {{ parent() }}
+{% endblock %}
+{% block pjaxend %}{% endblock %}

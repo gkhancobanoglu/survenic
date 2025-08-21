@@ -1,0 +1,83 @@
+{#
+    This file render group index
+#}
+<style>
+    .modern-qindex-group-list {
+        border-radius: 10px;
+        background: #fff;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+        padding: 0.7rem 0.5rem 0.7rem 0.5rem;
+        margin-bottom: 1.2rem;
+    }
+    .modern-qindex-group-btn {
+        font-size: 0.97rem;
+        color: #2563eb;
+        background: #f8fafc;
+        border-radius: 7px;
+        border: 1.5px solid #dbeafe;
+        margin-bottom: 0.5rem;
+        padding: 0.5rem 1.1rem;
+        font-weight: 500;
+        transition: background 0.14s, color 0.14s, border 0.14s;
+        width: 100%;
+        text-align: left;
+        outline: none;
+        cursor: pointer;
+    }
+    .modern-qindex-group-btn.list-group-item-warning {
+        background: #fffbe6 !important;
+        color: #7a4f01 !important;
+        border-color: #ffe082;
+    }
+    .modern-qindex-group-btn.list-group-item-danger {
+        background: #fff0f0 !important;
+        color: #b3261e !important;
+        border-color: #ffbdbd;
+    }
+    .modern-qindex-group-btn.disabled {
+        background: #e9f5ff !important;
+        color: #0d6efd !important;
+        font-weight: 700;
+        border-color: #b6e0fe;
+        cursor: default;
+    }
+    .modern-qindex-group-btn:hover, .modern-qindex-group-btn:focus {
+        background: #e9f5ff;
+        color: #0d6efd;
+        border-color: #b6e0fe;
+        font-weight: 600;
+    }
+    .modern-qindex-group-list .h4 {
+        font-size: 1.08rem;
+        font-weight: 700;
+        color: #1e3a8a;
+        margin-bottom: 0.7rem;
+    }
+    @media (max-width: 600px) {
+        .modern-qindex-group-list {
+            padding: 0.4rem 0.2rem;
+        }
+        .modern-qindex-group-btn {
+            font-size: 0.95rem;
+            padding: 0.32rem 0.7rem;
+        }
+    }
+</style>
+<div class="list-group index-button-full modern-qindex-group-list">
+  <div class="list-group-item">
+      <div class="h4 list-group-item-heading">{{ gT("Question index") }}</div>
+  </div>
+  {% for step, indexItem in aSurveyInfo.aQuestionIndex.items %}
+    {% set templateClass = ''  %}
+    {% if attribute(indexItem.stepStatus, 'index-item-unanswered') is defined and attribute(indexItem.stepStatus, 'index-item-unanswered') == true  %}
+        {% set templateClass = templateClass ~ ' list-group-item-warning'  %}
+    {% endif %}
+    {% if attribute(indexItem.stepStatus, 'index-item-error') is defined and attribute(indexItem.stepStatus, 'index-item-error') == true   %}
+        {% set templateClass = templateClass ~ ' list-group-item-danger'  %}
+    {% endif %}
+    {% if attribute(indexItem.stepStatus, 'index-item-current') is defined and attribute(indexItem.stepStatus, 'index-item-current') == true %}
+        {% set templateClass = statusClass ~  ' disabled'  %}
+    {% endif %}
+    <button type="submit" name="move" value="{{ indexItem.step }}" class="list-group-item modern-qindex-group-btn {{ templateClass }}" >{{ indexItem.text }}</button>
+  {% endfor %}
+</div>

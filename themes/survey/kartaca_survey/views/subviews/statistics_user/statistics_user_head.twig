@@ -1,0 +1,55 @@
+{#
+    (¯·._.·(¯·..· Public Statistics Header ..·´¯)·._.·´¯)
+
+    This is the head for the public statistics page.
+
+#}
+
+<div class="modern-stats-header-card">
+    <h2 class='modern-stats-title'>{{ aSurveyInfo.surveyls_title }}</h2>
+    <div class='modern-stats-num-records'>{{ gT("Total records in survey") }} : {{ totalrecords }}</div>
+</div>
+<style>
+.modern-stats-header-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    padding: 1.2rem 1.2rem 1rem 1.2rem;
+    max-width: 540px;
+    margin: 0 auto 1.2rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.7rem;
+}
+.modern-stats-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #2563eb;
+    margin-bottom: 0.4rem;
+    letter-spacing: -0.5px;
+    text-align: center;
+}
+.modern-stats-num-records {
+    font-size: 1.01rem;
+    color: #1e3a8a;
+    font-weight: 600;
+    background: #eaf4ff;
+    border-radius: 7px;
+    padding: 0.4em 0.8em;
+    display: inline-block;
+}
+@media (max-width: 700px) {
+    .modern-stats-header-card {
+        padding: 0.7rem 0.2rem 0.7rem 0.2rem;
+        max-width: 98vw;
+    }
+    .modern-stats-title {
+        font-size: 0.98rem;
+    }
+    .modern-stats-num-records {
+        font-size: 0.93rem;
+        padding: 0.3em 0.5em;
+    }
+}
+</style>

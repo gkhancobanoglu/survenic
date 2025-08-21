@@ -1,0 +1,27 @@
+/* Survenic Modern AJAX Loading Bar */
+.ajax_loading_indicator {
+  height: 7px;
+  position: fixed;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 20000;
+  background: linear-gradient(90deg, #295fa6 0%, #f6b30e 100%);
+  box-shadow: 0 2px 8px 0 rgba(41, 95, 166, 0.1);
+  border-radius: 0 0 12px 12px;
+  opacity: 0.96;
+  transition: opacity 500ms linear, background 0.5s;
+  transition-delay: 1000ms;
+}
+
+.ajax_loading_indicator .ajax_loading_indicator {
+  display: none;
+  height: 8px;
+  border-radius: 12px;
+  -webkit-transition-timing-function: ease-in-out;
+  transition-timing-function: ease-in-out;
+  /* Safari */
+  -webkit-transition: width 1.6s;
+  transition: width 1.6s;
+}

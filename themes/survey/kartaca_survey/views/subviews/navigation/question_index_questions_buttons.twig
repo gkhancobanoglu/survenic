@@ -1,0 +1,92 @@
+{#
+    This file render question index
+#}
+<style>
+    .modern-qindex-questions-list {
+        border-radius: 10px;
+        background: #fff;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+        padding: 0.7rem 0.5rem 0.7rem 0.5rem;
+        margin-bottom: 1.2rem;
+    }
+    .modern-qindex-questions-btn {
+        font-size: 0.97rem;
+        color: #2563eb;
+        background: #f8fafc;
+        border-radius: 7px;
+        border: 1.5px solid #dbeafe;
+        margin-bottom: 0.5rem;
+        padding: 0.5rem 1.1rem;
+        font-weight: 500;
+        transition: background 0.14s, color 0.14s, border 0.14s;
+        width: 100%;
+        text-align: left;
+        outline: none;
+        cursor: pointer;
+    }
+    .modern-qindex-questions-btn.list-group-item-warning {
+        background: #fffbe6 !important;
+        color: #7a4f01 !important;
+        border-color: #ffe082;
+    }
+    .modern-qindex-questions-btn.list-group-item-danger {
+        background: #fff0f0 !important;
+        color: #b3261e !important;
+        border-color: #ffbdbd;
+    }
+    .modern-qindex-questions-btn.disabled {
+        background: #e9f5ff !important;
+        color: #0d6efd !important;
+        font-weight: 700;
+        border-color: #b6e0fe;
+        cursor: default;
+    }
+    .modern-qindex-questions-btn:hover, .modern-qindex-questions-btn:focus {
+        background: #e9f5ff;
+        color: #0d6efd;
+        border-color: #b6e0fe;
+        font-weight: 600;
+    }
+    .modern-qindex-questions-list .h4, .modern-qindex-questions-list .h5 {
+        font-size: 1.08rem;
+        font-weight: 700;
+        color: #1e3a8a;
+        margin-bottom: 0.7rem;
+    }
+    @media (max-width: 600px) {
+        .modern-qindex-questions-list {
+            padding: 0.4rem 0.2rem;
+        }
+        .modern-qindex-questions-btn {
+            font-size: 0.95rem;
+            padding: 0.32rem 0.7rem;
+        }
+    }
+</style>
+<div class="list-group index-button index-button-{{ aSurveyInfo.aQuestionIndex.type }} modern-qindex-questions-list">
+    <div class="list-group-item">
+        <div class="h4 list-group-item-heading">{{ gT("Question index") }}</div>
+    </div>
+    {% for indexGroup in aSurveyInfo.aQuestionIndex.items %}
+    <div class="list-group" data-gid="{{ indexGroup.gid }}">
+        <div class="list-group-item">
+            <div class="h5 list-group-item-heading">{{ flatString(indexGroup.text) }}</div>
+        </div>
+        {% for indexQuestion in indexGroup.questions %}
+        {% set templateClass = ''  %}
+        {% if attribute(indexQuestion.stepStatus, 'index-item-unanswered') is defined and attribute(indexQuestion.stepStatus, 'index-item-unanswered') == true  %}
+            {% set templateClass = templateClass ~ ' list-group-item-warning'  %}
+        {% endif %}
+        {% if attribute(indexQuestion.stepStatus, 'index-item-error') is defined and attribute(indexQuestion.stepStatus, 'index-item-error') == true   %}
+            {% set templateClass = templateClass ~ ' list-group-item-danger'  %}
+        {% endif %}
+        {% if attribute(indexQuestion.stepStatus, 'index-item-current') is defined and attribute(indexQuestion.stepStatus, 'index-item-current') == true %}
+            {% set templateClass = statusClass ~  ' disabled'  %}
+        {% endif %}
+            <button type="submit" name="move" value="{{ indexQuestion.step }}" class="list-group-item modern-qindex-questions-btn {{ templateClass }}" data-qid="{{ indexQuestion.qid }}">
+                {{ ellipsizeString(indexQuestion.text, 80, 0.6, "…" ) }}
+            </button>
+        {% endfor %}
+    </div>
+    {% endfor %}
+</div>
