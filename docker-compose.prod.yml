@@ -1,0 +1,40 @@
+services:
+  app:
+    image: ${IMAGE:-docker.io/gkhancobanoglu/survenic:latest}
+    restart: always
+    env_file: .env
+    ports:
+      - "8090:80"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      TZ: ${TZ}
+    volumes:
+      - ls_uploads:/var/www/html/upload
+      - ls_runtime:/var/www/html/application/runtime
+      - ls_config:/var/www/html/application/config
+
+  db:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      TZ: ${TZ}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    ports:
+      - "5432:5432"
+    volumes:
+      - ls_db:/var/lib/postgresql/data
+
+volumes:
+  ls_uploads:
+  ls_runtime:
+  ls_config:
+  ls_db:
