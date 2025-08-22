@@ -17,7 +17,6 @@ pipeline {
     stage('Compute Version') {
       steps {
         script {
-          // BRANCH_NAME boşsa git'ten öğren
           def branch = env.BRANCH_NAME ?: sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
           env.BRANCH_NAME = branch
           env.GIT_SHA     = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
