@@ -11,19 +11,30 @@ pipeline {
 
   stages {
     stage('Checkout') {
-      steps {
-        checkout scm
-      }
+      steps { checkout scm }
     }
 
     stage('Compute Version') {
       steps {
         script {
-          env.GIT_SHA   = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
-          env.VERSION   = "${env.BRANCH_NAME}-${env.BUILD_NUMBER}-${env.GIT_SHA}"
-          env.IMAGE_TAG = env.VERSION
+          // BRANCH_NAME boşsa git'ten öğren
+          def branch = env.BRANCH_NAME ?: sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
+          env.BRANCH_NAME = branch
+          env.GIT_SHA     = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+          env.VERSION     = "${branch}-${env.BUILD_NUMBER}-${env.GIT_SHA}"
+          env.IMAGE_TAG   = env.VERSION
         }
         echo "Version: ${env.VERSION}"
+      }
+    }
+
+    stage('Smoke: Docker CLI') {
+      steps {
+        sh '''
+          set -e
+          docker version
+          docker info | head -n 20
+        '''
       }
     }
 
@@ -60,11 +71,7 @@ pipeline {
   }
 
   post {
-    success {
-      echo "✅ Pushed: ${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG} ${env.BRANCH_NAME == 'main' ? '(+ latest)' : ''}"
-    }
-    failure {
-      echo "❌ Pipeline failed"
-    }
+    success { echo "✅ Pushed: ${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG} ${env.BRANCH_NAME == 'main' ? '(+ latest)' : ''}" }
+    failure { echo "❌ Pipeline failed" }
   }
 }
