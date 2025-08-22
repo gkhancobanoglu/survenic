@@ -7,11 +7,13 @@ pipeline {
     REG_CRED_ID = "dockerhub-creds"
   }
 
-  options { timestamps(); ansiColor('xterm') }
+  options { timestamps() }
 
   stages {
     stage('Checkout') {
-      steps { checkout scm }
+      steps {
+        checkout scm
+      }
     }
 
     stage('Compute Version') {
@@ -27,26 +29,42 @@ pipeline {
 
     stage('Build Image') {
       steps {
-        sh """
-          docker build -t ${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG} .
-          docker tag ${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG} ${REGISTRY}/${IMAGE_NAME}:${GIT_SHA}
-          ${env.BRANCH_NAME == 'main' ? "docker tag ${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG} ${REGISTRY}/${IMAGE_NAME}:latest" : "true"}
-        """
+        ansiColor('xterm') {
+          sh """
+            docker build \
+              --label org.opencontainers.image.revision=${GIT_SHA} \
+              --label org.opencontainers.image.version=${IMAGE_TAG} \
+              -t ${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG} .
+            docker tag ${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG} ${REGISTRY}/${IMAGE_NAME}:${GIT_SHA}
+            ${env.BRANCH_NAME == 'main' ? "docker tag ${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG} ${REGISTRY}/${IMAGE_NAME}:latest" : "true"}
+          """
+        }
       }
     }
 
     stage('Push Image') {
       steps {
-        withCredentials([usernamePassword(credentialsId: env.REG_CRED_ID, usernameVariable: 'U', passwordVariable: 'P')]) {
-          sh """
-            echo "$P" | docker login ${REGISTRY} -u "$U" --password-stdin
-            docker push ${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}
-            docker push ${REGISTRY}/${IMAGE_NAME}:${GIT_SHA}
-            ${env.BRANCH_NAME == 'main' ? "docker push ${REGISTRY}/${IMAGE_NAME}:latest" : "true"}
-            docker logout ${REGISTRY}
-          """
+        ansiColor('xterm') {
+          withCredentials([usernamePassword(credentialsId: env.REG_CRED_ID, usernameVariable: 'U', passwordVariable: 'P')]) {
+            sh """
+              echo "$P" | docker login ${REGISTRY} -u "$U" --password-stdin
+              docker push ${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}
+              docker push ${REGISTRY}/${IMAGE_NAME}:${GIT_SHA}
+              ${env.BRANCH_NAME == 'main' ? "docker push ${REGISTRY}/${IMAGE_NAME}:latest" : "true"}
+              docker logout ${REGISTRY}
+            """
+          }
         }
       }
+    }
+  }
+
+  post {
+    success {
+      echo "✅ Pushed: ${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG} ${env.BRANCH_NAME == 'main' ? '(+ latest)' : ''}"
+    }
+    failure {
+      echo "❌ Pipeline failed"
     }
   }
 }
